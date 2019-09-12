@@ -1,0 +1,101 @@
+:root {
+    box-sizing: border-box;
+}
+
+*,
+::after,
+::before {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.head {
+    padding-top: 1em;
+    padding-bottom: 1.5em;
+    margin: 0;
+    background-color: #00021F;
+    position: relative;
+}
+
+.head-title {
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+.head-title > span {
+    margin: 0;
+    color: yellow;
+}
+
+.fa-shopping-basket::before {
+    font-size: 2.2em;
+    color: white;
+    transition: .2s;
+}
+
+.basket {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+.basket:hover .fa-shopping-basket::before {
+    color: grey;
+    transition: .2s;
+}
+
+.basket-count {
+    display: none;
+    background-color: #DE781F;
+    color: white;
+    border-radius: 50%;
+    padding: .1em .4em;
+    font-size: 1.3em;
+    position: absolute;
+    top: -.5em;
+    left: -1em;
+}
+
+.search {
+    text-align: center;
+    margin-top: 1em;
+    position: relative;
+}
+
+.search > input {
+    width: 50%;
+    height: 2em;
+    border: none;
+    outline: none;
+    color: #00021F;
+    border-radius: .2em;
+    padding: 0 .5em;
+    position: relative;
+    margin-right: -.2em;
+}
+
+.fa-search::before {
+    display: none;
+    background-color: white;
+    font-size: 1.1em;
+    padding: 5px;
+    border-radius: .3em;
+    position: absolute;
+    bottom: 0;
+}
+
+/* placeholder style */
+::-webkit-input-placeholder         {color:#00021F;}
+::-moz-placeholder                  {color:#00021F;}/* Firefox 19+ */
+:-moz-placeholder                   {color:#00021F;}/* Firefox 18- */
+:-ms-input-placeholder              {color:#00021F;}
+:focus::-webkit-input-placeholder   {color: transparent}
+:focus::-moz-placeholder            {color: transparent}
+:focus:-moz-placeholder             {color: transparent}
+:focus:-ms-input-placeholder        {color: transparent}
