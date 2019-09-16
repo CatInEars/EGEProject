@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-let $modal = $('.modal > .add-modal, .modal > .add-modal-bg');
+let $modal = $('.modal > .modal-body, .modal > .add-modal-bg');
 
 $('.add-button').click(function() {
     $modal.show();

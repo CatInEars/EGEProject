@@ -109,15 +109,14 @@ body {
     display: block;
 }
 
-.add-modal {
+.modal-body {
     display: none;
     position: fixed;
-    left: 1em;
-    right: 1em;
-    top: 3em;
-    bottom: 3em;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
     background-color: white;
-    border-radius: .5em;
     z-index: 2;
     overflow: auto;
     padding: 3.5em 1.5em;
@@ -168,17 +167,14 @@ body {
    border-bottom: 2px solid #ccc;
    width: 100%;
    position: relative;
-
+   margin-top: 1em;
    font-size: 16px;
 }
 
 textarea {
+    padding-top: 1.5em;
 	resize: none;
     font-family: Arial, sans-serif;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
 }
 
 .modal-name {
@@ -227,5 +223,4 @@ textarea {
     height: 10em;
     overflow: auto;
     border: none;
-    border-bottom: 1px s
 }
