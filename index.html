@@ -24,6 +24,29 @@
         </div>
     </header>
 
+    <main>
+        <section class="add-section">
+            <button type="button" name="add-button" class="add-button">+ Добавить товар</button>
+            <div class="modal">
+                <div class="add-modal">
+                    <button type="button" name="close-button" class="modal-close">&times;</button>
+                    <h2 class="modal-title">Добавить товар</h2>
+                    <div class="modal-cool-input">
+                        <input type="text" class="modal-name" placeholder="">
+                        <span class="modal-cool-input__placeholder">Название</span>
+                    </div>
+
+                    <div class="modal-cool-input">
+                        <textarea name="description" class="modal-description" placeholder=""></textarea>
+                        <span class="modal-cool-input__placeholder">Описание</span>
+                    </div>
+
+                </div>
+                <div class="add-modal-bg"></div>
+            </div>
+        </section>
+    </main>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="script/main.js"></script>
 </body>
