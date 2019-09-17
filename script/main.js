@@ -1,5 +1,21 @@
 $(document).ready(function() {
 
+function addImage(input) {
+    let reader = new FileReader();
+
+    reader.onload = function(e) {
+      let src      = e.target.result;
+      let newimage = `<img src="${src}" class="image-file__added"></img>`
+      $('.image-add').append(newimage);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+}
+
+
+
+
+
 let $modal = $('.modal > .modal-body, .modal > .add-modal-bg');
 
 $('.add-button').click(function() {
@@ -8,7 +24,7 @@ $('.add-button').click(function() {
     $('body').css({
         overflow: 'hidden'
     }); // end css
-    
+
 }); // end click
 
 $('.modal-close').click(function() {
@@ -32,5 +48,9 @@ $('.modal-name, .modal-description').on('input', function(){
         $this.addClass('modal-name_filled');
     }
 }); // end on
+
+$('.file-input').change(function(event) {
+    addImage(this);
+}); // end change
 
 }); // end ready

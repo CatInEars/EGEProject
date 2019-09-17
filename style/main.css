@@ -70,7 +70,7 @@ body {
 }
 
 .search > input {
-    width: 50%;
+    width: 75%;
     height: 2.5em;
     border: none;
     outline: none;
@@ -229,4 +229,57 @@ textarea {
     background-color: transparent;
     border-top: 15px solid white;
     outline: none;
+}
+
+.form-group {
+    padding: 1em;
+    margin: 1em;
+}
+
+input[type=file] {
+    outline: 0;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+.label {
+    width: 120px;
+    border: 2px dashed grey;
+    border-radius: 5px;
+    display: block;
+    padding: 1.2em;
+    transition: border 300ms ease;
+    cursor: pointer;
+    text-align: center;
+    margin: 0;
+}
+
+.label i {
+    display: block;
+    font-size: 42px;
+    padding-bottom: 16px;
+}
+
+.label i, .label .file-title {
+    color: grey;
+    font-weight: bold;
+    transition: 200ms color;
+}
+
+.label:hover {
+    border: 2px solid #000;
+}
+
+.label:hover i, .label:hover .file-title {
+    color: #000;
+}
+
+.form-group {
+    display: flex;
+    justify-content: center;
+}
+
+.image-file__added {
+    width: 90px;
 }
