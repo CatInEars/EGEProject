@@ -4,10 +4,20 @@ let $modal = $('.modal > .modal-body, .modal > .add-modal-bg');
 
 $('.add-button').click(function() {
     $modal.show();
+
+    $('body').css({
+        overflow: 'hidden'
+    }); // end css
+    
 }); // end click
 
 $('.modal-close').click(function() {
     $modal.hide();
+
+    $('body').css({
+        overflow: 'auto'
+    }); // end css
+
 }); // end click
 
 $('.add-modal-bg').click(function() {

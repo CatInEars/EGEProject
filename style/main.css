@@ -163,7 +163,7 @@ body {
 }
 
 .modal-cool-input {
-    box-sizing: border-box;
+   box-sizing: border-box;
    border-bottom: 2px solid #ccc;
    width: 100%;
    position: relative;
@@ -172,9 +172,10 @@ body {
 }
 
 textarea {
-    padding-top: 1.5em;
+    border-top: 10px solid black;
 	resize: none;
     font-family: Arial, sans-serif;
+    min-width: 100%;
 }
 
 .modal-name {
@@ -204,7 +205,7 @@ textarea {
     left:0;
     top: 50%;
     line-height: 1em;
-    margin-top: -0.5em;
+    margin-top: 0;
     color: #777;
     transition: all 0.2s ease;
 }
@@ -215,12 +216,16 @@ textarea {
 .modal-description:focus + .modal-cool-input__placeholder {
     font-size: 0.8em;
     top: 0;
-    margin-top: 0.1em;
+    z-index: 2;
 }
 
 .modal-description {
     width: 80%;
-    height: 10em;
+    height: 7.5em;
     overflow: auto;
     border: none;
+    z-index: 2;
+    position: relative;
+    background-color: transparent;
+    border-top: 15px solid white;
 }
