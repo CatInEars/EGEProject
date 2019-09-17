@@ -228,4 +228,5 @@ textarea {
     position: relative;
     background-color: transparent;
     border-top: 15px solid white;
+    outline: none;
 }
