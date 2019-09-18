@@ -119,7 +119,7 @@ body {
     background-color: white;
     z-index: 2;
     overflow: auto;
-    padding: 3.5em 1.5em;
+    padding: .5em 1.5em;
 }
 
 .add-modal-bg {
@@ -231,6 +231,10 @@ textarea {
     outline: none;
 }
 
+.image-file__added {
+    width: 90px;
+}
+
 .form-group {
     padding: 1em;
     margin: 1em;
@@ -280,6 +284,17 @@ input[type=file] {
     justify-content: center;
 }
 
+.file-title .file-title-descr {
+    font-size: .6em;
+}
+
+.image-added-massage__error {
+    color: red;
+    display: none;
+}
+
 .image-file__added {
-    width: 90px;
+    width: 45%;
+    object-fit: cover;
+    margin: .2em;
 }

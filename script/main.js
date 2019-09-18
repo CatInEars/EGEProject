@@ -1,12 +1,26 @@
 $(document).ready(function() {
 
+function typeFileCheck(src) {
+    let type = src.substr(5, 5);
+    if(type == 'image') {
+        return true
+    }
+    return false
+}
+
 function addImage(input) {
     let reader = new FileReader();
 
     reader.onload = function(e) {
-      let src      = e.target.result;
-      let newimage = `<img src="${src}" class="image-file__added"></img>`
-      $('.image-add').append(newimage);
+      let src        = e.target.result;
+      let imageCheck = typeFileCheck(src);
+      if(imageCheck) {
+          $('.image-added-massage__error').hide();
+          let newimage = `<img src="${src}" class="image-file__added"></img>`
+          $('.image-add').append(newimage);
+      } else {
+          $('.image-added-massage__error').show();
+      }
     }
 
     reader.readAsDataURL(input.files[0]);
@@ -50,7 +64,22 @@ $('.modal-name, .modal-description').on('input', function(){
 }); // end on
 
 $('.file-input').change(function(event) {
-    addImage(this);
+
+    try{
+        addImage(this);
+    }catch {
+        
+    }
+
+    /* Это басня о том на кой #уй тута try
+    * Короче если юзер ничего не добавит, и нажмет
+    * отмену, то в классе FileReader, а конкретно в
+    * методе readAsDataURL происходит ошибка и
+    * "вываливается" в консоль, что выглядит
+    * не эстетичненько и я заебашил суда try
+    * так что ребята с telegrama не ебите мозг пж :)
+    */
+
 }); // end change
 
 }); // end ready
