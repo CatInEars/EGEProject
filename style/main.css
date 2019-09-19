@@ -288,13 +288,35 @@ input[type=file] {
     font-size: .6em;
 }
 
-.image-added-massage__error {
+.image-added-message__error,
+.image-added-message__error-full {
     color: red;
     display: none;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 .image-file__added {
-    width: 45%;
-    object-fit: cover;
+    width: 30%;
+    max-width: 10em;
+    min-width: 4em;
+    height: 6em;
     margin: .2em;
+}
+
+.image-add {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.image-file__added-global {
+    width: 100%;
+    max-height: 18em;
+    display: flex;
+    justify-content: center;
+}
+
+.image-file__added-global img {
+    width: 20em;
 }

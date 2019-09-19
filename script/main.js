@@ -11,21 +11,55 @@ function typeFileCheck(src) {
 function addImage(input) {
     let reader = new FileReader();
 
-    reader.onload = function(e) {
-      let src        = e.target.result;
-      let imageCheck = typeFileCheck(src);
-      if(imageCheck) {
-          $('.image-added-massage__error').hide();
-          let newimage = `<img src="${src}" class="image-file__added"></img>`
-          $('.image-add').append(newimage);
-      } else {
-          $('.image-added-massage__error').show();
-      }
+    if($('.image-file__added').length != 6) {
+
+        reader.onload = function(e) {
+          let src        = e.target.result;
+          let imageCheck = typeFileCheck(src);
+          if(imageCheck) {
+              if($('.image-file__added-global').hasClass('clear')) {
+
+                  $('.image-file__added-global').removeClass('clear');
+
+                  // добавление глобал версии
+                  $('.image-added-message__error').hide();
+                  let newimage = `<img src="${src}"></img>`
+                  $('.image-file__added-global').append(newimage);
+                  $('.label .far').hide();
+                  $('.label').css('padding', '.9em');
+
+                  //добавление мини версии
+                  newimage = `<img src="${src}" class="image-file__added"></img>`
+                  $('.image-add').append(newimage);
+
+              }else{
+
+                  $('.image-added-message__error').hide();
+                  let newimage = `<img src="${src}" class="image-file__added"></img>`
+                  $('.image-add').append(newimage);
+                  $('.label .far').hide();
+                  $('.label').css('padding', '.9em');
+
+              }
+          } else {
+              $('.image-added-message__error').show();
+          }
+        }
+
+        reader.readAsDataURL(input.files[0]);
+
+
+
+        if($('.image-file__added').length == 5) {
+            $('.form-group').hide();
+            //$('.image-file__added:first-child').removeClass('image-file__added').addClass('image-file__added-global');
+        }
+
+    }else {
+        $('.image-added-message__error-full').show();
+        setTimeout(() => {$('.image-added-message__error-full').fadeOut(700)}, 6000);
     }
-
-    reader.readAsDataURL(input.files[0]);
 }
-
 
 
 
@@ -68,7 +102,7 @@ $('.file-input').change(function(event) {
     try{
         addImage(this);
     }catch {
-        
+
     }
 
     /* Это басня о том на кой #уй тута try
@@ -81,5 +115,7 @@ $('.file-input').change(function(event) {
     */
 
 }); // end change
+
+
 
 }); // end ready
