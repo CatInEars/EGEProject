@@ -8,7 +8,7 @@ function typeFileCheck(src) {
     return false
 }
 
-function addImage(input) {
+function imageGallery(input) {
     let reader = new FileReader();
 
     if($('.image-file__added').length != 6) {
@@ -25,20 +25,22 @@ function addImage(input) {
                   $('.image-added-message__error').hide();
                   let newimage = `<img src="${src}"></img>`
                   $('.image-file__added-global').append(newimage);
-                  $('.label .far').hide();
-                  $('.label').css('padding', '.9em');
+                  $('.form-group').hide();
 
                   //добавление мини версии
-                  newimage = `<img src="${src}" class="image-file__added"></img>`
-                  $('.image-add').append(newimage);
+                  newImage = `<img src="${src}" class="image-file__added gallery-active"></img>`;
 
+                  // прячем большую версию кнопки т отображаем мини
+                  $('.image-add .label').before(newImage);
+                  $('.image-add .label').show();
               }else{
 
                   $('.image-added-message__error').hide();
-                  let newimage = `<img src="${src}" class="image-file__added"></img>`
-                  $('.image-add').append(newimage);
-                  $('.label .far').hide();
-                  $('.label').css('padding', '.9em');
+                  let newImage = `<img src="${src}" class="image-file__added"></img>`
+                  $('.image-add .label').before(newImage);
+                  // прячем большую версию кнопки т отображаем мини
+                  $('.form-group').hide();
+                  $('.image-add .label').show();
 
               }
           } else {
@@ -51,8 +53,8 @@ function addImage(input) {
 
 
         if($('.image-file__added').length == 5) {
-            $('.form-group').hide();
-            //$('.image-file__added:first-child').removeClass('image-file__added').addClass('image-file__added-global');
+            console.log('in if');
+            $('.label').hide();
         }
 
     }else {
@@ -62,6 +64,12 @@ function addImage(input) {
 }
 
 
+$(document).on('click', '.image-file__added',function() {
+    let $src = $(this).attr('src');
+    $('.image-file__added-global img').attr('src', $src);
+    $('.gallery-active').removeClass('gallery-active');
+    $(this).addClass('gallery-active');
+}); // end click
 
 
 let $modal = $('.modal > .modal-body, .modal > .add-modal-bg');
@@ -100,20 +108,10 @@ $('.modal-name, .modal-description').on('input', function(){
 $('.file-input').change(function(event) {
 
     try{
-        addImage(this);
+        imageGallery(this);
     }catch {
 
     }
-
-    /* Это басня о том на кой #уй тута try
-    * Короче если юзер ничего не добавит, и нажмет
-    * отмену, то в классе FileReader, а конкретно в
-    * методе readAsDataURL происходит ошибка и
-    * "вываливается" в консоль, что выглядит
-    * не эстетичненько и я заебашил суда try
-    * так что ребята с telegrama не ебите мозг пж :)
-    */
-
 }); // end change
 
 
