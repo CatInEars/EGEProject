@@ -46,6 +46,11 @@ function imageGallery(input) {
           } else {
               $('.image-added-message__error').show();
           }
+
+          if($('.image-file__added').length == 6) {
+              console.log('in if');
+              $('.image-add .label').hide();
+          }
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -54,7 +59,7 @@ function imageGallery(input) {
 
         if($('.image-file__added').length == 5) {
             console.log('in if');
-            $('.label').hide();
+            setTimeout(() => {$('.image-add .label').hide()}, 10);
         }
 
     }else {
