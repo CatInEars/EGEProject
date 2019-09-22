@@ -112,7 +112,11 @@ $('.modal-name, .modal-description').on('input', function(){
 
 $('.file-input').change(function(event) {
 
+    try{
         imageGallery(this);
+    }catch (e){
+
+    }
 }); // end change
 
 
