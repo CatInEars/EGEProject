@@ -8,6 +8,8 @@ function typeFileCheck(src) {
     return false
 }
 
+let image_add_status = false;
+
 function imageGallery(input) {
     let reader = new FileReader();
 
@@ -29,6 +31,11 @@ function imageGallery(input) {
 
                   //добавление мини версии
                   newImage = `<img src="${src}" class="image-file__added gallery-active"></img>`;
+
+                  image_add_status = true;
+                  $('.image-added-message__error-submit').hide();
+                  $('.image-added-message__error').hide();
+                  $('.image-added-message__error-full').hide();
 
                   // прячем большую версию кнопки т отображаем мини
                   $('.image-add .label').before(newImage);
@@ -67,7 +74,6 @@ function imageGallery(input) {
         setTimeout(() => {$('.image-added-message__error-full').fadeOut(700)}, 6000);
     }
 }
-
 
 $(document).on('click', '.image-file__added',function() {
     let $src = $(this).attr('src');
@@ -120,5 +126,46 @@ $('.file-input').change(function(event) {
 }); // end change
 
 
+$('form').submit(function(e) {
+    e.preventDefault();
+    let name = $('.modal-name').val();
+    if (name.length == 0) {
+        $('.name-value-error').show();
+    } else {
+        $('.name-value-error').hide();
+    }
+
+
+    let description = $('.modal-description').val();
+
+    if (description.length == 0) {
+        $('.description-value-error').show();
+        $('.description-value-length-error').hide();
+    } else if (description.length < 5 || description.length > 150) {
+        $('.description-value-error').hide();
+        $('.description-value-length-error').show();
+    }
+
+
+    let price = $('.modal-price').val();
+
+    if(isNaN(price)) {
+        $('.price-type-error').show();
+        $('.price-max-error').hide();
+        $('.price-error').hide();
+    } else {
+        if (price.length == 0) {
+            $('.price-error').show();
+            $('.price-max-error').hide();
+        } else if (price > 1000000) {
+            $('.price-error').hide();
+            $('.price-max-error').show();
+        }
+    }
+
+    if (!image_add_status) {
+        $('.image-added-message__error-submit').show();
+    }
+}); // end submit
 
 }); // end ready

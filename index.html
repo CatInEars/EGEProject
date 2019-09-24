@@ -29,40 +29,60 @@
             <button type="button" name="add-button" class="add-button">+ Добавить товар</button>
             <div class="modal">
                 <div class="modal-body">
-                    <button type="button" name="close-button" class="modal-close">&times;</button>
-                    <h2 class="modal-title">Добавить товар</h2>
+                    <form class="add-form">
 
-                    <div class="image-add">
-                        <div class="image-file__added-global clear"></div>
-                        <label class="label">
-                            <i class="fas fa-plus-circle"></i>
-                            <input type="file" class="file-input">
-                        </label>
-                    </div>
+                        <button type="button" name="close-button" class="modal-close">&times;</button>
+                        <h2 class="modal-title">Добавить товар</h2>
 
-                    <div class="form-group">
-                        <label class="label">
-                            <i class="far fa-file-image"></i>
-                            <span class="file-title">Добавте фото</span>
-                            <input type="file" class="file-input">
-                        </label>
-                    </div>
+                        <div class="image-add">
+                            <div class="image-file__added-global clear"></div>
+                            <label class="label">
+                                <i class="fas fa-plus-circle"></i>
+                                <input type="file" class="file-input">
+                            </label>
+                        </div>
 
-                    <div class="error-image-message-pack">
-                        <span class="image-added-message__error">Не удалось загрузить изображение</span>
-                        <span class="image-added-message__error-full">Можно загрузить только 6 изображений :(</span>
-                    </div>
+                        <div class="form-group">
+                            <label class="label">
+                                <i class="far fa-file-image"></i>
+                                <span class="file-title">Добавте фото</span>
+                                <input type="file" class="file-input" name="image">
+                            </label>
+                        </div>
 
-                    <div class="modal-cool-input">
-                        <input type="text" class="modal-name" placeholder="">
-                        <span class="modal-cool-input__placeholder">Название</span>
-                    </div>
+                        <div class="error-image-message-pack">
+                            <span class="image-added-message__error">Не удалось загрузить изображение</span>
+                            <span class="image-added-message__error-full">Можно загрузить только 6 изображений :(</span>
+                            <span class="image-added-message__error-submit">Пожалуйста загрузите изображение</span>
+                        </div>
 
-                    <div class="modal-cool-input">
-                        <textarea name="description" class="modal-description" placeholder=""></textarea>
-                        <span class="modal-cool-input__placeholder modal-cool__placeholder-bgc">Описание</span>
-                    </div>
+                        <div class="modal-cool-input">
+                            <input type="text" class="modal-name" placeholder="" name="name">
+                            <span class="modal-cool-input__placeholder">Название</span>
+                        </div>
 
+                        <span class="name-value-error">Введите название</span>
+
+                        <div class="modal-cool-input">
+                            <textarea name="description" class="modal-description" placeholder=""></textarea>
+                            <span class="modal-cool-input__placeholder modal-cool__placeholder-bgc">Описание</span>
+                        </div>
+
+                        <span class="description-value-error">Введите описание</span>
+                        <span class="description-value-length-error">Описание должно содержать от 5 до 150 символов. Да, эти правила - отстой :(</span>
+
+                        <div class="modal-cool-input">
+                            <input type="text" name="price" class="modal-name modal-price" placeholder="">
+                            <span class="modal-cool-input__placeholder">Цена ($)</span>
+                        </div>
+
+                        <span class="price-type-error">Введите корректное значение</span>
+                        <span class="price-error">Введите цену</span>
+                        <span class="price-max-error">Цена слишком велика</span>
+
+                        <input type="submit" value="Добавить товар" class="add_button">
+
+                    </form>
                 </div>
                 <div class="add-modal-bg"></div>
             </div>
