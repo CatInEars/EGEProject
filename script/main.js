@@ -41,7 +41,7 @@ function formChecker(context) {
         }
     }
 
-    if (!image_add_status) {
+    if ($('.image-file__added').length == 0) {
         $('.image-added-message__error-submit').show();
         $('.label-global').addClass('error-cool');
         $('.label-global > .far, .label-global > span').css({color: 'red'});
@@ -59,8 +59,6 @@ function typeFileCheck(src) {
     return false
 }
 
-let image_add_status = false;
-
 function imageGallery(input) {
     let reader = new FileReader();
 
@@ -76,21 +74,24 @@ function imageGallery(input) {
 
                   // добавление глобал версии
                   $('.image-added-message__error').hide();
-                  let newimage = `<img src="${src}"></img>`
+                  let newimage = `<img src="${src}"></img>`;
+                  $('.image-file__added-global').css('border-bottom', '2px solid grey')
                   $('.image-file__added-global').append(newimage);
                   $('.form-group').hide();
 
                   //добавление мини версии
                   newImage = `<img src="${src}" class="image-file__added gallery-active"></img>`;
 
-                  image_add_status = true;
                   $('.image-added-message__error-submit').hide();
                   $('.image-added-message__error').hide();
                   $('.image-added-message__error-full').hide();
 
-                  // прячем большую версию кнопки т отображаем мини
+                  // прячем большую версию кнопки и отображаем мини
                   $('.image-add .label').before(newImage);
                   $('.image-add .label').show();
+
+                  // отображаем кнопку удаления
+                  $('.delete-image').show();
               }else{
 
                   $('.image-added-message__error').hide();
@@ -123,6 +124,34 @@ function imageGallery(input) {
     }else {
         $('.image-added-message__error-full').show();
         setTimeout(() => {$('.image-added-message__error-full').fadeOut(700)}, 6000);
+    }
+}
+
+function deleteImage() {
+    if($('.image-file__added').length == 1) {
+
+        // прячем всё ненужное
+        $('.image-file__added-global img').remove();
+        $('.image-file__added-global').css('border', 'none');
+        $('.gallery-active').remove();
+        $('.image-add .label').hide();
+        $('.delete-image').hide();
+
+        // отображаем нужное)
+        $('.form-group').show();
+
+    } else {
+        if(!!($('.gallery-active').next('img').length)) {
+            let nextImg = $('.gallery-active').next('img');
+            $('.gallery-active').remove();
+            $('.image-file__added-global img').attr('src', nextImg.attr('src'))
+            nextImg.addClass('gallery-active');
+        } else {
+            let prevImg = $('.gallery-active').prev('img');
+            $('.gallery-active').remove();
+            $('.image-file__added-global img').attr('src', prevImg.attr('src'))
+            prevImg.addClass('gallery-active');
+        }
     }
 }
 
@@ -193,5 +222,7 @@ $('.modal-description').change(function() {
 $('.modal-price').change(function() {
     $('.price-error_hider').hide();
 });
+
+$('.delete-image').click(deleteImage);
 
 }); // end ready
