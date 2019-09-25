@@ -328,14 +328,16 @@ input[type=file] {
 }
 
 .image-file__added-global img {
-    width: 20em;
+    max-width: 20em;
+    height: 12em;
+    object-fit: cover;
 }
 
 .image-add .label {
     display: none;
     max-width: 6.3em;
     max-height: 6.3em;
-    margin: .1em;
+    margin: .3em;
 }
 
 .label .fas {
@@ -366,4 +368,15 @@ input[type=file] {
 
 .modal-body input[type=submit]:hover {
     background-color: #1D7CCE;
+}
+
+.image-add > img{
+    object-fit: cover;
+    box-shadow: 0 0 8px grey;
+    margin: .3em;
+    background-color: #DFDFDF;
+}
+
+.image-file__added-global > img {
+    object-fit: contain;
 }
