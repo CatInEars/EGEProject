@@ -176,6 +176,7 @@ $('.add-button').click(function() {
 
 $('.modal-close').click(function() {
     $modal.hide();
+    $('.error-message-hider').hide();
 
     $('body').css({
         overflow: 'auto'
