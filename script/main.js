@@ -1,5 +1,52 @@
 $(document).ready(function() {
 
+function formChecker() {
+
+    
+    $('.modal-cool-input').addClass('error-cool');
+    setTimeout(() => {$('.modal-cool-input').removeClass('error-cool')}, 500);
+
+
+    let name = $('.modal-name').val();
+    if (name.length == 0) {
+        $('.name-value-error').show();
+    } else {
+        $('.name-value-error').hide();
+    }
+
+
+    let description = $('.modal-description').val();
+
+    if (description.length == 0) {
+        $('.description-value-error').show();
+        $('.description-value-length-error').hide();
+    } else if (description.length < 5 || description.length > 150) {
+        $('.description-value-error').hide();
+        $('.description-value-length-error').show();
+    }
+
+
+    let price = $('.modal-price').val();
+
+    if(isNaN(price)) {
+        $('.price-type-error').show();
+        $('.price-max-error').hide();
+        $('.price-error').hide();
+    } else {
+        if (price.length == 0) {
+            $('.price-error').show();
+            $('.price-max-error').hide();
+        } else if (price > 1000000) {
+            $('.price-error').hide();
+            $('.price-max-error').show();
+        }
+    }
+
+    if (!image_add_status) {
+        $('.image-added-message__error-submit').show();
+    }
+} // end formChecker
+
 function typeFileCheck(src) {
     let type = src.substr(5, 5);
     if(type == 'image') {
@@ -128,44 +175,19 @@ $('.file-input').change(function(event) {
 
 $('form').submit(function(e) {
     e.preventDefault();
-    let name = $('.modal-name').val();
-    if (name.length == 0) {
-        $('.name-value-error').show();
-    } else {
-        $('.name-value-error').hide();
-    }
-
-
-    let description = $('.modal-description').val();
-
-    if (description.length == 0) {
-        $('.description-value-error').show();
-        $('.description-value-length-error').hide();
-    } else if (description.length < 5 || description.length > 150) {
-        $('.description-value-error').hide();
-        $('.description-value-length-error').show();
-    }
-
-
-    let price = $('.modal-price').val();
-
-    if(isNaN(price)) {
-        $('.price-type-error').show();
-        $('.price-max-error').hide();
-        $('.price-error').hide();
-    } else {
-        if (price.length == 0) {
-            $('.price-error').show();
-            $('.price-max-error').hide();
-        } else if (price > 1000000) {
-            $('.price-error').hide();
-            $('.price-max-error').show();
-        }
-    }
-
-    if (!image_add_status) {
-        $('.image-added-message__error-submit').show();
-    }
+    formChecker();
 }); // end submit
+
+$('.modal-name').change(function() {
+    $('.name-value-error').hide();
+});
+
+$('.modal-description').change(function() {
+    $('.description-error-hider').hide();
+});
+
+$('.modal-price').change(function() {
+    $('.price-error_hider').hide();
+});
 
 }); // end ready

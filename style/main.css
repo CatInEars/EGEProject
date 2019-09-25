@@ -171,6 +171,7 @@ body {
    margin-top: 1.5em;
    margin-bottom: 1.5em;
    font-size: 16px;
+   transition: .5s;
 }
 
 textarea {
@@ -379,4 +380,14 @@ input[type=file] {
 
 .image-file__added-global > img {
     object-fit: contain;
+}
+
+.error-cool{
+    border-color: red;
+    transition: .5s;
+}
+
+.error-cool > span {
+    color: red;
+    transition: .5s;
 }
