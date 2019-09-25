@@ -43,9 +43,12 @@ function formChecker(context) {
 
     if (!image_add_status) {
         $('.image-added-message__error-submit').show();
+        $('.label-global').addClass('error-cool');
+        $('.label-global > .far, .label-global > span').css({color: 'red'});
+        setTimeout(() => {$('.label-global > .far, .label-global > span').css({color: 'grey'})}, 500);
     }
 
-    setTimeout(() => {$('.modal-cool-input').removeClass('error-cool')}, 500);
+    setTimeout(() => {$('.modal-cool-input, .label-global').removeClass('error-cool')}, 500);
 } // end formChecker
 
 function typeFileCheck(src) {
@@ -174,7 +177,7 @@ $('.file-input').change(function(event) {
 }); // end change
 
 
-$('form').submit(function(e) {
+$('.form-submit').click(function(e) {
     e.preventDefault();
     formChecker($(this));
 }); // end submit
