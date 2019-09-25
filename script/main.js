@@ -1,15 +1,11 @@
 $(document).ready(function() {
 
-function formChecker() {
-
-    
-    $('.modal-cool-input').addClass('error-cool');
-    setTimeout(() => {$('.modal-cool-input').removeClass('error-cool')}, 500);
-
+function formChecker(context) {
 
     let name = $('.modal-name').val();
     if (name.length == 0) {
         $('.name-value-error').show();
+        $('.name-input').parent('.modal-cool-input').addClass('error-cool');
     } else {
         $('.name-value-error').hide();
     }
@@ -18,10 +14,11 @@ function formChecker() {
     let description = $('.modal-description').val();
 
     if (description.length == 0) {
+        $('.description-error-hider').hide();
         $('.description-value-error').show();
-        $('.description-value-length-error').hide();
+        $('.modal-description').parent('.modal-cool-input').addClass('error-cool');
     } else if (description.length < 5 || description.length > 150) {
-        $('.description-value-error').hide();
+        $('.description-error-hider').hide();
         $('.description-value-length-error').show();
     }
 
@@ -29,22 +26,26 @@ function formChecker() {
     let price = $('.modal-price').val();
 
     if(isNaN(price)) {
+        $('.price-error_hider').hide();
         $('.price-type-error').show();
-        $('.price-max-error').hide();
-        $('.price-error').hide();
+        $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
     } else {
         if (price.length == 0) {
+            $('.price-error_hider').hide();
             $('.price-error').show();
-            $('.price-max-error').hide();
+            $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
         } else if (price > 1000000) {
-            $('.price-error').hide();
+            $('.price-error_hider').hide();
             $('.price-max-error').show();
+            $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
         }
     }
 
     if (!image_add_status) {
         $('.image-added-message__error-submit').show();
     }
+
+    setTimeout(() => {$('.modal-cool-input').removeClass('error-cool')}, 500);
 } // end formChecker
 
 function typeFileCheck(src) {
@@ -175,7 +176,7 @@ $('.file-input').change(function(event) {
 
 $('form').submit(function(e) {
     e.preventDefault();
-    formChecker();
+    formChecker($(this));
 }); // end submit
 
 $('.modal-name').change(function() {
