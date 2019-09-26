@@ -155,6 +155,13 @@ function deleteImage() {
     }
 }
 
+
+let productId = [
+    913, 1337, 228
+]; // Я закинул айдишники товаров которые добавил сам
+
+
+
 $(document).on('click', '.image-file__added',function() {
     let $src = $(this).attr('src');
     $('.image-file__added-global img').attr('src', $src);
