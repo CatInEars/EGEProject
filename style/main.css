@@ -418,18 +418,24 @@ input[type=file] {
 }
 
 .products {
-    margin: 1.5em 1em;
+    margin: 1em .5em;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .product-mini {
-    margin: .5em;
-    width: 13em;
+    position: relative;
+    width: 48%;
+    margin-bottom: 1em;
+    min-width: 10em;
     min-height: 17em;
     box-shadow: 0 0 8px grey;
     border-radius: .3em;
+}
+
+.product-mini:nth-child(odd) {
+    margin-right: 3%;
 }
 
 .product-mini > img {
@@ -441,7 +447,7 @@ input[type=file] {
 }
 
 .product-mini > span {
-    font-size: 1em;
+    font-size: .875em;
     font-weight: 400;
     margin: 0 .875em;
 }
@@ -450,4 +456,12 @@ input[type=file] {
     font-size: 1em;
     font-weight: bold;
     padding-top: .2em;
+    position: absolute;
+    bottom: .5em;
+}
+
+@media(min-width: 650px) {
+    .products {
+        justify-content: flex-start;
+    }
 }
