@@ -132,7 +132,7 @@ function deleteImage() {
 
         // прячем всё ненужное
         $('.image-file__added-global img').remove();
-        $('.image-file__added-global').css('border', 'none');
+        $('.image-file__added-global').css('border', 'none').addClass('clear');
         $('.gallery-active').remove();
         $('.image-add .label').hide();
         $('.delete-image').hide();
