@@ -42,6 +42,7 @@ function formChecker(context) {
     }
 
     if ($('.image-file__added').length == 0) {
+        $('.image-added-message__error').hide();
         $('.image-added-message__error-submit').show();
         $('.label-global').addClass('error-cool');
         $('.label-global > .far, .label-global > span').css({color: 'red'});
@@ -244,5 +245,31 @@ $('.modal-price').change(function() {
 });
 
 $('.delete-image').click(deleteImage);
+
+let imgCountNow = 1;
+
+$('.product-img-gallery > img').click(function() {
+    let imageLength = $(this).parent('.product-img-gallery').children('img').length;
+
+    if(imgCountNow != imageLength) {
+        $(this).animate({
+            marginTop: '8em',
+            width: 0,
+            height: 0
+        }, 300, function() {
+            $(this).hide();
+        }); // end animate
+
+        $(this).next('img').animate({
+            marginLeft: 0,
+            marginTop: 0,
+            width: '100%',
+            height: '100%'
+        }, 300); // end animate
+
+        $('.product-img-gallery > span').text(`${++imgCountNow}/${imageLength}`);
+    }
+
+}); // end click
 
 }); // end ready
