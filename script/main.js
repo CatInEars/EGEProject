@@ -17,7 +17,7 @@ function formChecker(context) {
         $('.description-error-hider').hide();
         $('.description-value-error').show();
         $('.modal-description').parent('.modal-cool-input').addClass('error-cool');
-    } else if (description.length < 5 || description.length > 150) {
+    } else if (description.length < 5 || description.length > 1000) {
         $('.description-error-hider').hide();
         $('.description-value-length-error').show();
     }
@@ -170,10 +170,11 @@ $(document).on('click', '.image-file__added',function() {
 }); // end click
 
 
-let $modal = $('.modal > .modal-body, .modal > .add-modal-bg');
+let $addModal      = $('.modal > .modal-body, .modal > .add-modal-bg');
+    $productModal  = $('.modal > .product-modal, .modal > .product-modal-bg');
 
 $('.add-button').click(function() {
-    $modal.show();
+    $addModal.show();
 
     $('body').css({
         overflow: 'hidden'
@@ -181,8 +182,19 @@ $('.add-button').click(function() {
 
 }); // end click
 
+$('.product-mini').click(function() {
+    let thisId = $(this).attr('id');
+    $(`.modal > .product-modal-id__${thisId}`).show();
+    //console.log(`.modal > product-modal-id__${thisId}`);
+
+    $('body').css({
+        overflow: 'hidden'
+    }); // end css
+}); // end click
+
 $('.modal-close').click(function() {
-    $modal.hide();
+    $addModal.hide();
+    $productModal.hide();
     $('.error-message-hider').hide();
 
     $('body').css({
@@ -192,7 +204,7 @@ $('.modal-close').click(function() {
 }); // end click
 
 $('.add-modal-bg').click(function() {
-    $modal.hide();
+    $addModal.hide();
 }); // end click
 
 $('.modal-name, .modal-description').on('input', function(){
