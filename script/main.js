@@ -327,7 +327,7 @@ $('.product-img-gallery > img').swipe({
                 //анимирую уход картинки
                 $(this).animate({
                     left: '-110%'
-                }, 300, function() {
+                }, 250, function() {
                     $(this).removeClass('clicked');
                 }); // end animate
 
@@ -335,7 +335,7 @@ $('.product-img-gallery > img').swipe({
                 $(this).next('img').addClass('clicked').animate({
                     left: 0,
                     marginLeft: 0
-                }, 300, function() {
+                }, 250, function() {
                     $(this).removeClass('clicked');
                 }); // end animate
 
@@ -361,7 +361,7 @@ $('.product-img-gallery > img').swipe({
                 //анимирую уход картинки
                 $(this).animate({
                     left: '110%'
-                }, 300, function() {
+                }, 250, function() {
                     $(this).removeClass('clicked');
                 }); // end animate
 
@@ -369,7 +369,7 @@ $('.product-img-gallery > img').swipe({
                 $(this).prev('img').addClass('clicked').animate({
                     left: 0,
                     marginLeft: 0
-                }, 300, function() {
+                }, 250, function() {
                     $(this).removeClass('clicked');
                 }); // end animate
 
