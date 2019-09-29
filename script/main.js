@@ -1,5 +1,30 @@
 $(document).ready(function() {
 
+function swipeDetector(event, phase, direction, distance, duration, fingerCount, fingerData, currentDirection) {
+    if (phase=="start"){
+        // сработает в начале swipe
+    }
+    if (phase=="end"){
+        //сработает через 20 пикселей то число которое выбрали в threshold
+        if (direction == 'left') {
+            //сработает при движении влево
+            alert('left');
+        }
+        if (direction == 'right') {
+            //сработает при движении вправо
+            alert('ridht');
+        }
+        if (direction == 'up') {
+            //сработает при движении вверх
+            alert('up');
+        }
+        if (direction == 'down') {
+            //сработает при движении вниз
+            alert('down');
+        }
+    }
+};
+
 function formChecker(context) {
 
     let name = $('.modal-name').val();
@@ -306,5 +331,11 @@ $('.product-img-gallery > img').click(function() {
     }*/
 
 }).stop(); // end click
+
+$('body').swipe({
+    swipeStatus: swipeDetector,
+    triggerOnTouchEnd: false,
+    threshold: 20 // сработает через 20 пикселей
+});
 
 }); // end ready
