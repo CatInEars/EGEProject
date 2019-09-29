@@ -1,29 +1,26 @@
 $(document).ready(function() {
 
 function swipeDetector(event, phase, direction, distance, duration, fingerCount, fingerData, currentDirection) {
-    if (phase=="start"){
-        // сработает в начале swipe
-    }
     if (phase=="end"){
         //сработает через 20 пикселей то число которое выбрали в threshold
         if (direction == 'left') {
             //сработает при движении влево
-            alert('left');
+            return 'left'
         }
         if (direction == 'right') {
             //сработает при движении вправо
-            alert('ridht');
+            return 'right'
         }
         if (direction == 'up') {
             //сработает при движении вверх
-            alert('up');
+            return 'up'
         }
         if (direction == 'down') {
             //сработает при движении вниз
-            alert('down');
+            return 'down'
         }
     }
-};
+}
 
 function formChecker(context) {
 
@@ -273,69 +270,119 @@ $('.delete-image').click(deleteImage);
 
 let imgNumNow = 1;
 
-$('.product-img-gallery > img').click(function() {
+$('.product-img-gallery > img').swipe({
+    swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 
-    if($(this).hasClass('clicked')) {
-        return
-    } else {
-        $(this).addClass('clicked');
-    }
+        let imgCount        = $(this).parent('.product-img-gallery').children('img').length;
+        let imgCountElement = $(this).parent('.product-img-gallery').children('.img-count');
 
-    let imgCount        = $(this).parent('.product-img-gallery').children('img').length;
-    let imgCountElement = $(this).parent('.product-img-gallery').children('.img-count');
-    if(imgNumNow == imgCount) {
-        $(this).animate({
-            marginLeft: '-1.2em'
-        }, 100);
+        if(imgCount == 1) {
+            if(direction == 'left') {
+                $(this).addClass('clicked').animate({
+                    marginLeft: '-1.2em'
+                }, 100);
 
-        $(this).animate({
-            marginLeft: 0
-        }, 100, function() {
-            $(this).removeClass('clicked');
-        });
+                $(this).animate({
+                    marginLeft: 0
+                }, 100, function() {
+                    $(this).removeClass('clicked');
+                });
+            } else if (direction == 'right') {
+                $(this).addClass('clicked').animate({
+                    marginLeft: '1.2em'
+                }, 100);
 
-    }else if(imgNumNow < imgCount) {
+                $(this).animate({
+                    marginLeft: 0
+                }, 100, function() {
+                    $(this).removeClass('clicked');
+                });
+            }
 
-        imgNumNow++;
-        console.log(imgNumNow);
-        //анимирую уход картинки
-        $(this).animate({
-            left: '-110%'
-        }, 400, function() {
-            $(this).removeClass('clicked');
-        }); // end animate
+            return
+        }
 
-        //анимирую "приход" картинки
-        $(this).next('img').animate({
-            left: 0,
-            marginLeft: 0
-        }, 400); // end animate
+        if($(this).hasClass('clicked')) {
+            return
+        } else {
+            $(this).addClass('clicked');
+        }
 
-        imgCountElement.text(`${imgNumNow}/${imgCount}`);
+        if(direction == 'left') {
 
-    }/* else {
-        imgNumNow--;
-        console.log(imgNumNow);
+            if(imgNumNow == imgCount) {
+                $(this).animate({
+                    marginLeft: '-1.2em'
+                }, 100);
 
-        $(this).animate({
-            left: '100%',
-            marginLeft: '1.5em'
-        }, 400, function() {
-            $(this).removeClass('clicked');
-        }); // end animate
+                $(this).animate({
+                    marginLeft: 0
+                }, 100, function() {
+                    $(this).removeClass('clicked');
+                });
 
-        $(this).prev('img').animate({
-            left: 0
-        }, 400); // end animate
+            }else if(imgNumNow < imgCount) {
 
-    }*/
+                imgNumNow++;
+                //анимирую уход картинки
+                $(this).animate({
+                    left: '-110%'
+                }, 300, function() {
+                    $(this).removeClass('clicked');
+                }); // end animate
 
-}).stop(); // end click
+                //анимирую "приход" картинки
+                $(this).next('img').addClass('clicked').animate({
+                    left: 0,
+                    marginLeft: 0
+                }, 300, function() {
+                    $(this).removeClass('clicked');
+                }); // end animate
 
-$('body').swipe({
-    swipeStatus: swipeDetector,
-    triggerOnTouchEnd: false,
-    threshold: 20 // сработает через 20 пикселей
-});
+                imgCountElement.text(`${imgNumNow}/${imgCount}`);
+
+            }
+        } else if (direction == 'right') {
+
+            if(imgNumNow == 1) {
+                $(this).animate({
+                    marginLeft: '1.2em'
+                }, 100);
+
+                $(this).animate({
+                    marginLeft: 0
+                }, 100, function() {
+                    $(this).removeClass('clicked');
+                });
+
+            }else if(imgNumNow <= imgCount) {
+
+                imgNumNow--;
+                //анимирую уход картинки
+                $(this).animate({
+                    left: '110%'
+                }, 300, function() {
+                    $(this).removeClass('clicked');
+                }); // end animate
+
+                //анимирую "приход" картинки
+                $(this).prev('img').addClass('clicked').animate({
+                    left: 0,
+                    marginLeft: 0
+                }, 300, function() {
+                    $(this).removeClass('clicked');
+                }); // end animate
+
+                imgCountElement.text(`${imgNumNow}/${imgCount}`);
+
+            }
+
+        }
+
+
+    },
+    triggerOnTouchEnd:false,
+    threshold:20 // сработает через 20 пикселей
+}).stop(); // end swipe
 
 }); // end ready
