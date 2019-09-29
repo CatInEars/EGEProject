@@ -246,30 +246,65 @@ $('.modal-price').change(function() {
 
 $('.delete-image').click(deleteImage);
 
-let imgCountNow = 1;
+let imgNumNow = 1;
 
 $('.product-img-gallery > img').click(function() {
-    let imageLength = $(this).parent('.product-img-gallery').children('img').length;
 
-    if(imgCountNow != imageLength) {
-        $(this).animate({
-            marginTop: '8em',
-            width: 0,
-            height: 0
-        }, 300, function() {
-            $(this).hide();
-        }); // end animate
-
-        $(this).next('img').animate({
-            marginLeft: 0,
-            marginTop: 0,
-            width: '100%',
-            height: '100%'
-        }, 300); // end animate
-
-        $('.product-img-gallery > span').text(`${++imgCountNow}/${imageLength}`);
+    if($(this).hasClass('clicked')) {
+        return
+    } else {
+        $(this).addClass('clicked');
     }
 
-}); // end click
+    let imgCount        = $(this).parent('.product-img-gallery').children('img').length;
+    let imgCountElement = $(this).parent('.product-img-gallery').children('.img-count');
+    if(imgNumNow == imgCount) {
+        $(this).animate({
+            marginLeft: '-1.2em'
+        }, 100);
+
+        $(this).animate({
+            marginLeft: 0
+        }, 100, function() {
+            $(this).removeClass('clicked');
+        });
+
+    }else if(imgNumNow < imgCount) {
+
+        imgNumNow++;
+        console.log(imgNumNow);
+        //анимирую уход картинки
+        $(this).animate({
+            left: '-110%'
+        }, 400, function() {
+            $(this).removeClass('clicked');
+        }); // end animate
+
+        //анимирую "приход" картинки
+        $(this).next('img').animate({
+            left: 0,
+            marginLeft: 0
+        }, 400); // end animate
+
+        imgCountElement.text(`${imgNumNow}/${imgCount}`);
+
+    }/* else {
+        imgNumNow--;
+        console.log(imgNumNow);
+
+        $(this).animate({
+            left: '100%',
+            marginLeft: '1.5em'
+        }, 400, function() {
+            $(this).removeClass('clicked');
+        }); // end animate
+
+        $(this).prev('img').animate({
+            left: 0
+        }, 400); // end animate
+
+    }*/
+
+}).stop(); // end click
 
 }); // end ready
