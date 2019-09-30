@@ -24,10 +24,13 @@ function swipeDetector(event, phase, direction, distance, duration, fingerCount,
 
 function formChecker(context) {
 
+    let errorHave = false;
+
     let name = $('.modal-name').val();
     if (name.length == 0) {
         $('.name-value-error').show();
         $('.name-input').parent('.modal-cool-input').addClass('error-cool');
+        errorHave = true;
     } else {
         $('.name-value-error').hide();
     }
@@ -39,9 +42,11 @@ function formChecker(context) {
         $('.description-error-hider').hide();
         $('.description-value-error').show();
         $('.modal-description').parent('.modal-cool-input').addClass('error-cool');
+        errorHave = true;
     } else if (description.length < 5 || description.length > 1000) {
         $('.description-error-hider').hide();
         $('.description-value-length-error').show();
+        errorHave = true;
     }
 
 
@@ -51,27 +56,35 @@ function formChecker(context) {
         $('.price-error_hider').hide();
         $('.price-type-error').show();
         $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
+        errorHave = true;
     } else {
         if (price.length == 0) {
             $('.price-error_hider').hide();
             $('.price-error').show();
             $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
+            errorHave = true;
         } else if (price > 1000000) {
             $('.price-error_hider').hide();
             $('.price-max-error').show();
             $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
+            errorHave = true;
         }
     }
 
     if ($('.image-file__added').length == 0) {
         $('.image-added-message__error').hide();
         $('.image-added-message__error-submit').show();
+        errorHave = true;
         $('.label-global').addClass('error-cool');
         $('.label-global > .far, .label-global > span').css({color: 'red'});
         setTimeout(() => {$('.label-global > .far, .label-global > span').css({color: 'grey'})}, 500);
     }
 
-    setTimeout(() => {$('.modal-cool-input, .label-global').removeClass('error-cool')}, 500);
+    if(!!errorHave) {
+        setTimeout(() => {$('.modal-cool-input, .label-global').removeClass('error-cool')}, 500);
+    } else {
+        console.log(errorHave);
+    }
 } // end formChecker
 
 function typeFileCheck(src) {
@@ -126,6 +139,7 @@ function imageGallery(input) {
 
               }
           } else {
+              $('.image-error__hider').hide();
               $('.image-added-message__error').show();
           }
 
@@ -268,13 +282,14 @@ $('.modal-price').change(function() {
 
 $('.delete-image').click(deleteImage);
 
-let imgNumNow = 1;
 
 $('.product-img-gallery > img').swipe({
     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 
+
+        let imgNumNow       = +($(this).parent('.product-img-gallery').children('.img-count').children('.imgNumNow').text());
         let imgCount        = $(this).parent('.product-img-gallery').children('img').length;
-        let imgCountElement = $(this).parent('.product-img-gallery').children('.img-count');
+        let imgCountElement = $(this).parent('.product-img-gallery').children('.img-count').children('.imgNumNow');
 
         if(imgCount == 1) {
             if(direction == 'left') {
@@ -339,7 +354,7 @@ $('.product-img-gallery > img').swipe({
                     $(this).removeClass('clicked');
                 }); // end animate
 
-                imgCountElement.text(`${imgNumNow}/${imgCount}`);
+                imgCountElement.text(`${imgNumNow}`);
 
             }
         } else if (direction == 'right') {
@@ -373,7 +388,7 @@ $('.product-img-gallery > img').swipe({
                     $(this).removeClass('clicked');
                 }); // end animate
 
-                imgCountElement.text(`${imgNumNow}/${imgCount}`);
+                imgCountElement.text(`${imgNumNow}`);
 
             }
 
