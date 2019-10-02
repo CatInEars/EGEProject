@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function swipeDetector(event, phase, direction, distance, duration, fingerCount, fingerData, currentDirection) {
     if (phase=="end"){
         //сработает через 20 пикселей то число которое выбрали в threshold
@@ -83,9 +87,67 @@ function formChecker(context) {
     if(!!errorHave) {
         setTimeout(() => {$('.modal-cool-input, .label-global').removeClass('error-cool')}, 500);
     } else {
-        console.log(errorHave);
+        productAdd()
     }
 } // end formChecker
+
+function productAdd() {
+
+    let id = getRandomInt(1, 10000);
+    while (productId.indexOf(id) != -1) {
+        num = getRandomInt(1, 10000);
+    }
+    productId.push(id);
+
+    let miniClone  = $('.product-mini:first-child').removeClass('product-modal-id__228').clone(true);
+    let modalClone = $('.modal:first-child').clone();
+
+    miniClone.removeClass('product-mini-id__228').addClass(`product-mini-id__${id}`).attr('id', id);
+
+    $('.products-mini').append(miniClone);
+
+    // image
+
+    let image = $('.image-add > img').clone().removeClass('image-file__added gallery-active');
+    let imgSrc = image.attr('src');
+    $(`.product-mini-id__${id}`).children('img').attr('src', imgSrc);
+
+    // name
+    let name = $('.name-input').val();
+    $(`.product-mini-id__${id} > .product-mini-name`).text(name);
+
+    // price
+    let price = $('.modal-price').val();
+    $(`.product-mini-id__${id} > .product-mini-price`).text(`${price}$`);
+
+
+    // modal version
+
+    modalClone.children('.product-modal').removeClass('product-modal-id__228').addClass(`product-modal-id__${id}`).attr('id', id);
+    $('.products-modal').append(modalClone);
+
+    // name
+    $(`.product-modal-id__${id} > .product-modal-name`).text(name);
+    // price
+    $(`.product-modal-id__${id} > .product-modal-price`).text(`${price}$`);
+    // description
+    let description = $('.modal-description').val();
+    $(`.product-modal-id__${id} > .product-modal-description`).text(description);
+
+    // image
+    let imageLength = $('.image-add > img').length;
+    if (imageLength == 1) {
+        $(`.product-modal-id__${id} > .product-img-gallery > img`).remove();
+        let thisImgSrc = $('.image-add > img').attr('src');
+        $(`.product-modal-id__${id} > .product-img-gallery`).prepend(`<img src="${thisImgSrc}" class="product-modal-img-banner" id="banner">`);
+    } else {
+
+    }
+
+    // add swipe
+    $(`.product-modal-id__${id} .product-img-gallery > img`).swipe(swipeOBj).stop(); // end swipe
+
+}
 
 function typeFileCheck(src) {
     let type = src.substr(5, 5);
@@ -154,7 +216,6 @@ function imageGallery(input) {
 
 
         if($('.image-file__added').length == 5) {
-            console.log('in if');
             setTimeout(() => {$('.image-add .label').hide()}, 10);
         }
 
@@ -198,7 +259,6 @@ let productId = [
 ]; // Я закинул айдишники товаров которые добавил сам
 
 
-
 $(document).on('click', '.image-file__added',function() {
     let $src = $(this).attr('src');
     $('.image-file__added-global img').attr('src', $src);
@@ -208,7 +268,6 @@ $(document).on('click', '.image-file__added',function() {
 
 
 let $addModal      = $('.modal > .modal-body, .modal > .add-modal-bg');
-    $productModal  = $('.modal > .product-modal, .modal > .product-modal-bg');
 
 $('.add-button').click(function() {
     $addModal.show();
@@ -219,7 +278,7 @@ $('.add-button').click(function() {
 
 }); // end click
 
-$('.product-mini').click(function() {
+$(document).on('click', '.product-mini',function() {
     let thisId = $(this).attr('id');
     $(`.modal > .product-modal-id__${thisId}`).show();
     //console.log(`.modal > product-modal-id__${thisId}`);
@@ -229,8 +288,9 @@ $('.product-mini').click(function() {
     }); // end css
 }); // end click
 
-$('.modal-close').click(function() {
+$(document).on('click', '.modal-close', function() {
     $addModal.hide();
+    let $productModal  = $('.modal > .product-modal, .modal > .product-modal-bg');
     $productModal.hide();
     $('.error-message-hider').hide();
 
@@ -282,8 +342,7 @@ $('.modal-price').change(function() {
 
 $('.delete-image').click(deleteImage);
 
-
-$('.product-img-gallery > img').swipe({
+let swipeOBj = {
     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 
 
@@ -398,6 +457,8 @@ $('.product-img-gallery > img').swipe({
     },
     triggerOnTouchEnd:false,
     threshold:20 // сработает через 20 пикселей
-}).stop(); // end swipe
+};
+
+$('.product-img-gallery > img').swipe(swipeOBj).stop(); // end swipe
 
 }); // end ready
