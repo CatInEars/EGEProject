@@ -141,12 +141,37 @@ function productAdd() {
         let thisImgSrc = $('.image-add > img').attr('src');
         $(`.product-modal-id__${id} > .product-img-gallery`).prepend(`<img src="${thisImgSrc}" class="product-modal-img-banner" id="banner">`);
     } else {
+        let $thisSrc = [];
+        $('.image-add > img').each(function() {
+            $thisSrc.push($(this).attr('src'));
+        }); // end each
 
+        $(`.product-modal-id__${id} > .product-img-gallery > img`).remove();
+
+        for(let i = 0; i < $thisSrc.length; i++) {
+            if(i == 0) {
+                $(`.product-modal-id__${id} > .product-img-gallery`).prepend(`<img src="${$thisSrc[i]}" class="product-modal-img-banner" id="banner">`);
+            } else if(i == 1){
+                $(`.product-modal-id__${id} > .product-img-gallery > img`).after(`<img src="${$thisSrc[i]}" class="product-modal-img-banner" id="banner">`);
+            } else {
+                $(`.product-modal-id__${id} > .product-img-gallery img:last-of-type`).after(`<img src="${$thisSrc[i]}" class="product-modal-img-banner" id="banner">`);
+            }
+        }
     }
 
     // add swipe
-    $(`.product-modal-id__${id} .product-img-gallery > img`).swipe(swipeOBj).stop(); // end swipe
+    $(`.product-modal-id__${id} .product-img-gallery > img`).swipe(swipeOBj).stop();
 
+    $(`.product-modal-id__${id} .product-img-gallery > .img-count`).html(`<span class="imgNumNow">1</span>/${imageLength}`);
+
+    // modal-add clear
+    $('.modal-close').click();
+    $('.image-add > img, .image-file__added-global > img').remove();
+    $('.image-file__added-global').css('border', 'none').addClass('clear');
+    $('.delete-image, .image-add .label').hide();
+    $('.add-form input, .add-form textarea').val('').removeClass('modal-name_filled');
+
+    $('.form-group').show();
 }
 
 function typeFileCheck(src) {
