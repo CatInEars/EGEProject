@@ -135,17 +135,21 @@ body {
 
 .add-button {
     position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 1.4em;
+    bottom: .5em;
+    right: .5em;
     font-weight: bold;
+    padding: .2em .5em;
     border: none;
     outline: none;
     text-transform: uppercase;
     background-color: #1F85DE;
     color: white;
-    font-size: 0.875em;
+    font-size: 2.5em;
     z-index: 1;
+    border-radius: 50%;
+    width: 62px;
+    height: 62px;
+    box-shadow: 5px 5px 8px grey;
 }
 
 .add-button:hover {
