@@ -529,12 +529,16 @@ input[type=file] {
     background-color: #D7A609;
 }
 
-@media(min-width: 650px) {
+@media(min-width: 700px) {
 
 }
 
 @media(max-width: 345px) {
-    .products {
+    .products-mini {
         justify-content: space-around;
+    }
+
+    .product-mini {
+        width: 60%;
     }
 }
