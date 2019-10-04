@@ -401,13 +401,13 @@ let swipeOBj = {
             return
         }
 
-        if($(this).hasClass('clicked')) {
-            return
-        } else {
-            $(this).addClass('clicked');
-        }
-
         if(direction == 'left') {
+
+            if($(this).hasClass('clicked')) {
+                return
+            } else {
+                $(this).addClass('clicked');
+            }
 
             if(imgNumNow == imgCount) {
                 $(this).animate({
@@ -442,6 +442,12 @@ let swipeOBj = {
 
             }
         } else if (direction == 'right') {
+
+            if($(this).hasClass('clicked')) {
+                return
+            } else {
+                $(this).addClass('clicked');
+            }
 
             if(imgNumNow == 1) {
                 $(this).animate({

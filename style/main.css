@@ -135,9 +135,8 @@ body {
 
 .add-button {
     position: fixed;
-    bottom: .5em;
-    right: .5em;
-    font-weight: bold;
+    bottom: .2em;
+    right: .3em;
     padding: .2em .5em;
     border: none;
     outline: none;
@@ -149,7 +148,7 @@ body {
     border-radius: 50%;
     width: 62px;
     height: 62px;
-    box-shadow: 5px 5px 8px grey;
+    box-shadow: 3px 3px 8px lightgrey;
 }
 
 .add-button:hover {
@@ -304,7 +303,8 @@ input[type=file] {
 .description-value-length-error,
 .price-error,
 .price-max-error,
-.price-type-error {
+.price-type-error,
+.price-max-num_length-error {
     color: red;
     display: none;
     font-size: 1em;
