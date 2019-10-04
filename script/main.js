@@ -172,6 +172,7 @@ function productAdd() {
     $('.add-form input, .add-form textarea').val('').removeClass('modal-name_filled');
 
     $('.form-group').show();
+    $('.form-submit').css('background-color', 'grey');
 }
 
 function typeFileCheck(src) {
@@ -215,12 +216,20 @@ function imageGallery(input) {
 
                   // отображаем кнопку удаления
                   $('.delete-image').show();
-              }else{
+
+                  let descriptionLength = $('.modal-body textarea').val().length;
+                  if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5) {
+                      $('.form-submit').css('background-color', '#1F85DE');
+                  } else {
+                      $('.form-submit').css('background-color', 'grey');
+                  }
+
+              } else{
 
                   $('.image-added-message__error').hide();
                   let newImage = `<img src="${src}" class="image-file__added"></img>`
                   $('.image-add .label').before(newImage);
-                  // прячем большую версию кнопки т отображаем мини
+                  // прячем большую версию кнопки и отображаем мини
                   $('.form-group').hide();
                   $('.image-add .label').show();
 
@@ -248,6 +257,7 @@ function imageGallery(input) {
         $('.image-added-message__error-full').show();
         setTimeout(() => {$('.image-added-message__error-full').fadeOut(700)}, 6000);
     }
+
 }
 
 function deleteImage() {
@@ -262,6 +272,8 @@ function deleteImage() {
 
         // отображаем нужное)
         $('.form-group').show();
+
+         $('.form-submit').css('background-color', 'grey');
 
     } else {
         if(!!($('.gallery-active').next('img').length)) {
@@ -290,6 +302,15 @@ $(document).on('click', '.image-file__added',function() {
     $('.gallery-active').removeClass('gallery-active');
     $(this).addClass('gallery-active');
 }); // end click
+
+$('input, textarea').keyup(function() {
+    let descriptionLength = $('.modal-body textarea').val().length;
+    if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5) {
+        $('.form-submit').css('background-color', '#1F85DE');
+    } else {
+        $('.form-submit').css('background-color', 'grey');
+    }
+});
 
 
 let $addModal      = $('.modal > .modal-body, .modal > .add-modal-bg');
@@ -339,7 +360,6 @@ $('.modal-name, .modal-description').on('input', function(){
 }); // end on
 
 $('.file-input').change(function(event) {
-
     try{
         imageGallery(this);
     }catch (e){

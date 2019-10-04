@@ -364,7 +364,7 @@ input[type=file] {
     right: 0;
     border: none;
     outline: none;
-    background-color: #1F85DE;
+    background-color: grey;
     text-align: center;
     color: white;
     padding: 1em;
@@ -373,10 +373,11 @@ input[type=file] {
     width: 100%;
     font-weight: bold;
     z-index: 3;
+    cursor: pointer;
 }
 
 .form-submit:hover {
-    background-color: #1D7CCE;
+    background-color: #9A9A9A;
 }
 
 .image-add > img{
