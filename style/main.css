@@ -560,7 +560,7 @@ input[type=file] {
     background-color: #000107;
     opacity: black;
     color: white;
-    font-size: 1.2em;
+    font-size: 1em;
     cursor: default;
     box-shadow: 0 0 16px grey;
     margin-bottom: -100px;
