@@ -171,6 +171,7 @@ function productAdd() {
 
     // modal-add clear
     $('.modal-close').click();
+    $('.modal-cool-input__dollar').hide();
     $('.image-add > img, .image-file__added-global > img').remove();
     $('.image-file__added-global').css('border', 'none').addClass('clear');
     $('.delete-image, .image-add .label').hide();
@@ -178,6 +179,33 @@ function productAdd() {
 
     $('.form-group').show();
     $('.form-submit').css('background-color', 'grey');
+
+    //push-modal
+    $('.product-add__compleate').animate({marginBottom: 0}, 450)
+    let line = $('.product-add__compleate > .progress-line');
+    let lineAnimate = new Promise(function(resolve, reject) {
+        line.animate({
+            marginLeft: '-100%'
+        }, 3500, () => resolve()); // end animate
+    });
+    lineAnimate
+    .then(() => {
+        $('.product-add__compleate').animate({
+            marginBottom: '-100px'
+        }, 450, () => line.css('margin-left', '0'));
+    });
+
+    $('.product-add__compleate > .cancel-button').click(function() {
+        $('.product-add__compleate').animate({
+            marginBottom: '-100px'
+        }, 450);
+        $(`.products-modal > .modal:last-child`).fadeOut(250, function() {
+            $(this).remove();
+        });
+        $(`.product-mini:last-child`).fadeOut(250, function() {
+            $(this).remove();
+        });
+    }); // end click
 }
 
 function typeFileCheck(src) {

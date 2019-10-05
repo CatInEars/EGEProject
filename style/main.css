@@ -549,6 +549,44 @@ input[type=file] {
     background-color: #D7A609;
 }
 
+.product-add__compleate {
+    padding-bottom: .2em;
+    padding-top: .2em;
+    z-index: 3;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000107;
+    opacity: black;
+    color: white;
+    font-size: 1.2em;
+    cursor: default;
+    box-shadow: 0 0 16px grey;
+    margin-bottom: -100px;
+}
+
+.product-add__compleate > p {
+    float: left;
+    margin-left: 1em;
+}
+
+.product-add__compleate > a {
+    color: #D7A609;
+    position: absolute;
+    bottom: 1.2em;
+    right: 1.5em;
+    cursor: pointer;
+}
+
+.product-add__compleate > .progress-line {
+    width: 100%;
+    position: absolute;
+    height: .2em;
+    background-color: #D7A609;
+    margin-top: -.2em;
+}
+
 @media(min-width: 700px) {
 
 }
@@ -560,5 +598,17 @@ input[type=file] {
 
     .product-mini {
         width: 60%;
+    }
+
+    .product-add__compleate > p {
+        float: none;
+        text-align: center;
+    }
+
+    .product-add__compleate > a {
+        position: relative;
+        right: 0;
+        left: 50%;
+        margin-left: -35px;
     }
 }
