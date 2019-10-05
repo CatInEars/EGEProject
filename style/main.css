@@ -558,9 +558,8 @@ input[type=file] {
     left: 0;
     right: 0;
     background-color: #000107;
-    opacity: black;
     color: white;
-    font-size: 1em;
+    font-size: .8em;
     cursor: default;
     box-shadow: 0 0 16px grey;
     margin-bottom: -100px;
