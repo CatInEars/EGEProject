@@ -72,6 +72,10 @@ function formChecker(context) {
             $('.price-max-error').show();
             $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
             errorHave = true;
+        }else if(String(price).length > 7) {
+            $('.price-type-error').show();
+            $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
+            errorHave = true;
         }
     }
 
@@ -118,6 +122,7 @@ function productAdd() {
 
     // price
     let price = $('.modal-price').val();
+    price = price.replace(/^0+/, '');
     $(`.product-mini-id__${id} > .product-mini-price`).text(`${price}$`);
 
 
@@ -219,7 +224,7 @@ function imageGallery(input) {
 
                   let descriptionLength = $('.modal-body textarea').val().length;
                   if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5) {
-                      $('.form-submit').css('background-color', '#1F85DE');
+                      $('.form-submit').css({backgroundColor: '#1F85DE', transition: '.5s'});
                   } else {
                       $('.form-submit').css('background-color', 'grey');
                   }
@@ -306,7 +311,7 @@ $(document).on('click', '.image-file__added',function() {
 $('input, textarea').keyup(function() {
     let descriptionLength = $('.modal-body textarea').val().length;
     if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5) {
-        $('.form-submit').css('background-color', '#1F85DE');
+        $('.form-submit').css({backgroundColor: '#1F85DE', transition: '.5s'});
     } else {
         $('.form-submit').css('background-color', 'grey');
     }
@@ -358,6 +363,18 @@ $('.modal-name, .modal-description').on('input', function(){
         $this.addClass('modal-name_filled');
     }
 }); // end on
+
+$('.modal-price').focus(function() {
+    $('.modal-cool-input__dollar').show();
+}); // end focus
+
+$('.modal-price').blur(function() {
+    if($(this).val() == '') {
+        $('.modal-cool-input__dollar').hide();
+    }else {
+        $('.modal-cool-input__dollar').show();
+    }
+}); // end blur
 
 $('.file-input').change(function(event) {
     try{
