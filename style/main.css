@@ -559,7 +559,7 @@ input[type=file] {
     right: 0;
     background-color: #000107;
     color: white;
-    font-size: .8em;
+    font-size: 1em;
     cursor: default;
     box-shadow: 0 0 16px grey;
     margin-bottom: -100px;
