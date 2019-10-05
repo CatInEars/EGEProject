@@ -156,6 +156,7 @@ input::-webkit-inner-spin-button {
     width: 62px;
     height: 62px;
     box-shadow: 3px 3px 8px lightgrey;
+    margin-top: 80vh;
 }
 
 .add-button:hover {
@@ -391,6 +392,7 @@ input[type=file] {
     z-index: 3;
     cursor: pointer;
     transition: .5s;
+    margin-top: 80vh;
 }
 
 .form-submit:hover {
