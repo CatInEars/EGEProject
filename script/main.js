@@ -265,7 +265,7 @@ function imageGallery(input) {
                   $('.delete-image').show();
 
                   let descriptionLength = $('.modal-body textarea').val().length;
-                  if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5) {
+                  if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5 && isInteger(+($('.modal-body input[type=number]').val()))) {
                       $('.form-submit').css({backgroundColor: '#1F85DE', transition: '.5s'});
                   } else {
                       $('.form-submit').css('background-color', 'grey');
@@ -356,7 +356,7 @@ $(document).on('click', '.image-file__added',function() {
 
 $('input, textarea').keyup(function() {
     let descriptionLength = $('.modal-body textarea').val().length;
-    if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5) {
+    if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5 && isInteger(+($('.modal-body input[type=number]').val()))) {
         $('.form-submit').css({backgroundColor: '#1F85DE', transition: '.5s'});
     } else {
         $('.form-submit').css('background-color', 'grey');
