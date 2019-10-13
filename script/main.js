@@ -424,7 +424,7 @@ $('.modal-price').blur(function() {
 
 $('.modal-price').keydown(function(e){
     if (e.key === "." || e.key === "," || e.key === "-") e.preventDefault();
-    alert(e.key)
+    console.log(e.keyCode);
 }); // end keydown
 
 $('.file-input').change(function(event) {
