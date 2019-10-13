@@ -149,7 +149,8 @@ function productAdd() {
     $(`.product-modal-id__${id} > .product-modal-price`).text(`${price}$`);
     // description
     let description = $('.modal-description').val();
-    $(`.product-modal-id__${id} > .product-modal-description`).text(description);
+    var lines = description.split("\n");
+    $(`.product-modal-id__${id} > .product-modal-description`).html(lines.join("<br/>"));
 
     // image
     let imageLength = $('.image-add > img').length;
@@ -424,7 +425,6 @@ $('.modal-price').blur(function() {
 
 $('.modal-price').keydown(function(e){
     if (e.key === "." || e.key === "," || e.key === "-") e.preventDefault();
-    alert(e.keyCode);
 }); // end keydown
 
 $('.file-input').change(function(event) {
