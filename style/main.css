@@ -321,7 +321,8 @@ input[type=file] {
 .price-error,
 .price-max-error,
 .price-type-error,
-.price-max-num_length-error {
+.price-max-num_length-error,
+.price-integer-error {
     color: red;
     display: none;
     font-size: 1em;

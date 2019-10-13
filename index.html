@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="modal-cool-input">
-                            <input type="text" class="modal-name name-input" placeholder="" name="name">
+                            <input type="text" class="modal-name name-input" placeholder="" name="name" autocomplete="off">
                             <span class="modal-cool-input__placeholder">Название</span>
                         </div>
 
@@ -82,7 +82,7 @@
                         <span class="description-value-length-error description-error-hider error-message-hider">Описание должно содержать от 5 до 1000 символов. Да, эти правила - отстой :(</span>
 
                         <div class="modal-cool-input">
-                            <input type="number" name="price" class="modal-name modal-price" placeholder="" step="1" min="0">
+                            <input type="number" name="price" class="modal-name modal-price" placeholder="" step="1" min="0" autocomplete="off">
                             <span class="modal-cool-input__placeholder">Цена</span>
                             <span class="modal-cool-input__dollar">$</span>
                         </div>
@@ -90,6 +90,7 @@
                         <span class="price-type-error price-error_hider error-message-hider">Введите корректное значение</span>
                         <span class="price-error price-error_hider error-message-hider">Введите цену</span>
                         <span class="price-max-error price-error_hider error-message-hider">Цена слишком велика</span>
+                        <span class="price-integer-error price-error_hider error-message-hider">Введите целое число</span>
 
                         <a class="form-submit">Добавить товар</a>
 

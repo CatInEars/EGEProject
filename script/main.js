@@ -4,6 +4,10 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function isInteger(num) {
+  return (num ^ 0) === num;
+}
+
 function swipeDetector(event, phase, direction, distance, duration, fingerCount, fingerData, currentDirection) {
     if (phase=="end"){
         //сработает через 20 пикселей то число которое выбрали в threshold
@@ -72,12 +76,20 @@ function formChecker(context) {
             $('.price-max-error').show();
             $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
             errorHave = true;
-        }else if(String(price).length > 7) {
+        } else if(String(price).length > 7) {
+            $('.price-error_hider').hide();
             $('.price-type-error').show();
+            $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
+            errorHave = true;
+        } else if(!isInteger(+price)) {
+            $('.price-error_hider').hide();
+            $('.price-integer-error').show();
             $('.modal-price').parent('.modal-cool-input').addClass('error-cool');
             errorHave = true;
         }
     }
+
+    console.log(isInteger(+price));
 
     if ($('.image-file__added').length == 0) {
         $('.image-added-message__error').hide();
@@ -205,6 +217,8 @@ function productAdd() {
         $(`.product-mini:last-child`).fadeOut(250, function() {
             $(this).remove();
         });
+
+        productId.splice(productId.length - 1);
     }); // end click
 }
 
@@ -308,7 +322,11 @@ function deleteImage() {
 
          $('.form-submit').css('background-color', 'grey');
 
-    } else {
+    }else {
+        if($('.image-file__added').length == 6) {
+            $('.image-add .label').show();
+        }
+
         if(!!($('.gallery-active').next('img').length)) {
             let nextImg = $('.gallery-active').next('img');
             $('.gallery-active').remove();
@@ -403,6 +421,10 @@ $('.modal-price').blur(function() {
         $('.modal-cool-input__dollar').show();
     }
 }); // end blur
+
+$('.modal-price').keydown(function(e){
+    if (e.key === "." || e.key === "," || e.key === "-") e.preventDefault();
+}); // end keydown
 
 $('.file-input').change(function(event) {
     try{
