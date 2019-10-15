@@ -375,7 +375,8 @@ input[type=file] {
 }
 
 .modal-body .form-submit,
-.add-basket {
+.add-basket,
+.remove-the-basket {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -444,7 +445,8 @@ input[type=file] {
     font-size: 1em;
 }
 
-.products-mini {
+.products-mini,
+.basket-products-mini {
     margin: 1em .5em;
     display: flex;
     flex-wrap: wrap;
@@ -487,7 +489,8 @@ input[type=file] {
     bottom: .5em;
 }
 
-.product-modal {
+.product-modal,
+.basket-modal {
     display: none;
     position: fixed;
     left: 0;
@@ -499,6 +502,10 @@ input[type=file] {
     overflow-x: hidden;
     padding: .5em 1.5em 4em 1.5em;
     max-width: 100vw;
+}
+
+.basket-modal {
+    padding: .5em .5em 4em .5em;
 }
 
 .product-img-gallery {
@@ -550,7 +557,9 @@ input[type=file] {
     background-color: #D7A609;
 }
 
-.product-add__compleate {
+.product-add__compleate,
+.product-basket__compleate,
+.product-basket__remove {
     padding-bottom: .2em;
     padding-top: .2em;
     z-index: 3;
@@ -566,12 +575,16 @@ input[type=file] {
     margin-bottom: -100px;
 }
 
-.product-add__compleate > p {
+.product-add__compleate > p,
+.product-basket__compleate > p,
+.product-basket__remove > p {
     float: left;
     margin-left: 1em;
 }
 
-.product-add__compleate > a {
+.product-add__compleate > a,
+.product-basket__compleate > a,
+.product-basket__remove > a {
     color: #D7A609;
     position: absolute;
     bottom: 1.2em;
@@ -579,7 +592,9 @@ input[type=file] {
     cursor: pointer;
 }
 
-.product-add__compleate > .progress-line {
+.product-add__compleate > .progress-line,
+.product-basket__compleate > .progress-line,
+.product-basket__remove > .progress-line {
     width: 100%;
     position: absolute;
     height: .2em;
@@ -587,12 +602,39 @@ input[type=file] {
     margin-top: -.2em;
 }
 
+.basket-product-none {
+    color: grey;
+    font-size: 1.1em;
+}
+
+.product-mini > .modal-close {
+    right: -.3em;
+    top: -.2em;
+    height: .7em;
+    width: .7em;
+    background-color: white;
+    padding-bottom: 35px;
+    border-radius: 5px;
+}
+
+.basket-products-mini {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.product-modal > .remove-the-basket {
+    background-color: red;
+}
+
 @media(min-width: 700px) {
 
 }
 
 @media(max-width: 345px) {
-    .products-mini {
+    .products-mini,
+    .basket-products-mini {
         justify-content: space-around;
     }
 

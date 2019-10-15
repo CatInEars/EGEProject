@@ -115,7 +115,7 @@ function productAdd() {
     }
     productId.push(id);
 
-    let miniClone  = $('.product-mini:first-child').removeClass('product-modal-id__228').clone(true);
+    let miniClone  = $('.product-mini-id__228').clone(true);
     let modalClone = $('.modal:first-child').clone();
 
     miniClone.removeClass('product-mini-id__228').addClass(`product-mini-id__${id}`).attr('id', id);
@@ -142,6 +142,7 @@ function productAdd() {
 
     modalClone.children('.product-modal').removeClass('product-modal-id__228').addClass(`product-modal-id__${id}`).attr('id', id);
     $('.products-modal').append(modalClone);
+    $(`product-modal-id__${id}`).append('<div class="add-modal-bg product-modal-bg"></div>');
 
     // name
     $(`.product-modal-id__${id} > .product-modal-name`).text(name);
@@ -194,7 +195,7 @@ function productAdd() {
     $('.form-submit').css('background-color', 'grey');
 
     //push-modal
-    $('.product-add__compleate').animate({marginBottom: 0}, 450)
+    $('.product-add__compleate').animate({marginBottom: 0}, 450);
     let line = $('.product-add__compleate > .progress-line');
     let lineAnimate = new Promise(function(resolve, reject) {
         line.animate({
@@ -221,6 +222,7 @@ function productAdd() {
 
         productId.splice(productId.length - 1);
     }); // end click
+
 }
 
 function typeFileCheck(src) {
@@ -376,10 +378,12 @@ $('.add-button').click(function() {
 
 }); // end click
 
+let inBasket = false;
+
 $(document).on('click', '.product-mini',function() {
     let thisId = $(this).attr('id');
     $(`.modal > .product-modal-id__${thisId}`).show();
-    //console.log(`.modal > product-modal-id__${thisId}`);
+    if(inBasket) $('.basket-modal').hide();
 
     $('body').css({
         overflow: 'hidden'
@@ -388,9 +392,14 @@ $(document).on('click', '.product-mini',function() {
 
 $(document).on('click', '.modal-close', function() {
     $addModal.hide();
+    $('.modal > .basket-modal').hide();
     let $productModal  = $('.modal > .product-modal, .modal > .product-modal-bg');
     $productModal.hide();
     $('.error-message-hider').hide();
+
+    if(inBasket) {
+        $('.basket-modal').show();
+    }
 
     $('body').css({
         overflow: 'auto'
@@ -579,5 +588,70 @@ let swipeOBj = {
 };
 
 $('.product-img-gallery > img').swipe(swipeOBj).stop(); // end swipe
+
+$('.basket').click(function() {
+    $('.basket-modal').show();
+    inBasket = true;
+}); // end click
+
+$('.basket-modal > .modal-close').click(function() {
+    inBasket = false;
+}); // end click
+
+$(document).on('click', '.add-basket', function() {
+    if(!$(this).hasClass('remove-the-basket')) {
+        let parentBlockId = $(this).parent('.product-modal').attr('id');
+        let clone = $(`.products > .products-mini > .product-mini-id__${parentBlockId}`).clone(true);
+        $('.basket-modal > .basket-products-mini').append(clone);
+
+        $('.modal-close').click();
+        $('.basket-product-none').hide();
+
+        $(this).text('Удалить из корзины').removeClass('add-basket').addClass('remove-the-basket');
+
+        // modal-push
+        $('.product-basket__compleate').animate({marginBottom: 0}, 450);
+        let line = $('.product-basket__compleate > .progress-line');
+        line.css('margin-left', '0');
+
+        $('.product-basket__compleate > .cancel-button').click(function() {
+            $(`.product-modal-id__${parentBlockId} > .remove-the-basket`).text('Добавить в корзину').removeClass('remove-the-basket').addClass('add-basket');
+            $('.product-basket__compleate').animate({
+                marginBottom: '-100px'
+            }, 450);
+            $('.basket-products-mini > .product-mini:last-child').fadeOut(150, function() {
+                $(this).remove();
+                if($('.basket-products-mini > .product-mini:last-child').length == 0) $('.basket-product-none').show();
+            }); // end fadeOut
+
+        }); // end click
+
+        let lineAnimate = new Promise(function(resolve, reject) {
+            line.stop().animate({
+                marginLeft: '-100%'
+            }, 3500, () => resolve()); // end animate
+        });
+        lineAnimate
+        .then(() => {
+            $('.product-basket__compleate').animate({
+                marginBottom: '-100px'
+            }, 450, () => line.css('margin-left', '0'));
+            $('.product-basket__compleate > .cancel-button').unbind('click');
+        });
+    }
+}); // end on
+
+$(document).on('click', '.remove-the-basket', function() {
+    let parentBlockId = $(this).parent('.product-modal').attr('id');
+    $(`.basket-products-mini > .product-mini-id__${parentBlockId}`).remove();
+    console.log($('.basket-products-mini > .product-mini').length);
+    if($('.basket-products-mini > .product-mini').length == 0) {
+        $('.basket-product-none').show();
+    }
+    $(this).removeClass('remove-the-basket').addClass('add-basket').text('Добавить в корзину');
+
+
+}); // end on
+
 
 }); // end ready
