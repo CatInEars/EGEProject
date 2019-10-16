@@ -632,6 +632,12 @@ input[type=file] {
     background-color: red;
 }
 
+.product-summ {
+    font-weight: bold;
+    font-size: 1.2em;
+    display: none;
+}
+
 @media(min-width: 700px) {
 
 }
