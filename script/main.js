@@ -39,6 +39,11 @@ function formChecker(context) {
         $('.name-value-error').show();
         $('.name-input').parent('.modal-cool-input').addClass('error-cool');
         errorHave = true;
+    }else if(name.length < 3 || name.length >= 30){
+        $('.name-error_hider').hide();
+        $('.name-length-error').show();
+        $('.name-input').parent('.modal-cool-input').addClass('error-cool');
+        errorHave = true;
     } else {
         $('.name-value-error').hide();
     }
@@ -115,7 +120,7 @@ function productAdd() {
     }
     productId.push(id);
 
-    let miniClone  = $('.product-mini-id__228').clone(true);
+    let miniClone  = $('.products-mini > .product-mini-id__228').clone(true);
     let modalClone = $('.modal:first-child').clone();
 
     miniClone.removeClass('product-mini-id__228').addClass(`product-mini-id__${id}`).attr('id', id);
@@ -130,7 +135,7 @@ function productAdd() {
 
     // name
     let name = $('.name-input').val();
-    $(`.product-mini-id__${id} > .product-mini-name`).text(name);
+    $(`.product-mini-id__${id} .product-mini-name`).text(name);
 
     // price
     let price = $('.modal-price').val();
@@ -268,7 +273,7 @@ function imageGallery(input) {
                   $('.delete-image').show();
 
                   let descriptionLength = $('.modal-body textarea').val().length;
-                  if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5 && isInteger(+($('.modal-body input[type=number]').val()))) {
+                  if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length >= 3 && $('.modal-body input[type=text]').val().length < 30 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5 && isInteger(+($('.modal-body input[type=number]').val()))) {
                       $('.form-submit').css({backgroundColor: '#1F85DE', transition: '.5s'});
                   } else {
                       $('.form-submit').css('background-color', 'grey');
@@ -359,7 +364,7 @@ $(document).on('click', '.image-file__added',function() {
 
 $('input, textarea').keyup(function() {
     let descriptionLength = $('.modal-body textarea').val().length;
-    if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length != 0 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5 && isInteger(+($('.modal-body input[type=number]').val()))) {
+    if ($('.image-file__added').length != 0 && $('.modal-body input[type=text]').val().length >= 3 && $('.modal-body input[type=text]').val().length < 30 && $('.modal-body input[type=number]').val().length != 0 && descriptionLength >= 5 && isInteger(+($('.modal-body input[type=number]').val()))) {
         $('.form-submit').css({backgroundColor: '#1F85DE', transition: '.5s'});
     } else {
         $('.form-submit').css('background-color', 'grey');

@@ -322,7 +322,8 @@ input[type=file] {
 .price-max-error,
 .price-type-error,
 .price-max-num_length-error,
-.price-integer-error {
+.price-integer-error,
+.name-length-error {
     color: red;
     display: none;
     font-size: 1em;
@@ -475,10 +476,12 @@ input[type=file] {
     margin-bottom: .5em;
 }
 
-.product-mini > span {
-    font-size: .875em;
-    font-weight: 400;
-    margin: 0 .875em;
+.product-mini > .span-padding {
+    padding: 0 .875em;
+}
+
+.product-mini  .product-mini-name {
+    word-break: break-all;
 }
 
 .product-mini > .product-mini-price {
@@ -487,6 +490,7 @@ input[type=file] {
     padding-top: .2em;
     position: absolute;
     bottom: .5em;
+    padding: 0 .875em;
 }
 
 .product-modal,
