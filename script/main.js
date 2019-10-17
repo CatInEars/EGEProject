@@ -698,7 +698,7 @@ $(document).on('click', '.remove-the-basket', function() {
 
 $('.buy').click(function() {
     $('body > *').remove();
-    $('body').css('height', '1000vh');
+    $('body').css('height', '8000px');
     $('body').append(`<div class="bi-eggs">
         <h1>Ы?</h1>
         <p class="down">↓</p>
