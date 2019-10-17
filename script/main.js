@@ -626,13 +626,13 @@ $(document).on('click', '.add-basket', function() {
         $(this).text('Удалить из корзины').removeClass('add-basket').addClass('remove-the-basket');
 
         // modal-push
-        $('.product-basket__compleate').animate({marginBottom: 0}, 450);
+        $('.product-basket__compleate').stop().animate({marginBottom: 0}, 450);
         let line = $('.product-basket__compleate > .progress-line');
         line.css('margin-left', '0');
 
         $('.product-basket__compleate > .cancel-button').click(function() {
             $(`.product-modal-id__${parentBlockId} > .remove-the-basket`).text('Добавить в корзину').removeClass('remove-the-basket').addClass('add-basket');
-            $('.product-basket__compleate').animate({
+            $('.product-basket__compleate').stop().animate({
                 marginBottom: '-100px'
             }, 450);
             $('.basket-products-mini > .product-mini:last-child').fadeOut(150, function() {
