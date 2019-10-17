@@ -668,7 +668,6 @@ input[type=file] {
 .bi-eggs > .hi {
     position: absolute;
     margin-top: 990vh;
-    margin-top: 100%;
 }
 
 @media(min-width: 700px) {
