@@ -16,7 +16,7 @@ body {
 
 .head {
     padding-top: 1em;
-    padding-bottom: 1.5em;
+    padding-bottom: 1em;
     margin: 0;
     background-color: #00021F;
     position: relative;
@@ -39,6 +39,11 @@ body {
     transition: .2s;
 }
 
+.welcome {
+    font-size: 1.3em;
+    color: white;
+}
+
 .basket {
     position: absolute;
     top: 1em;
@@ -53,13 +58,13 @@ body {
 .basket-count {
     display: none;
     background-color: #DE781F;
-    color: white;
     border-radius: 50%;
     padding: .1em .4em;
-    font-size: 1.3em;
     position: absolute;
-    top: -.5em;
-    left: -1em;
+    top: -.2em;
+    left: -.5em;
+    width: .7em;
+    height: .8em;
 }
 
 .search {

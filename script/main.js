@@ -621,6 +621,8 @@ $(document).on('click', '.add-basket', function() {
         $('.modal-close').click();
         $('.basket-product-none').hide();
 
+        $('.basket-count').show();
+
         $(this).text('Удалить из корзины').removeClass('add-basket').addClass('remove-the-basket');
 
         // modal-push
@@ -635,18 +637,17 @@ $(document).on('click', '.add-basket', function() {
             }, 450);
             $('.basket-products-mini > .product-mini:last-child').fadeOut(150, function() {
                 $(this).remove();
-                if($('.basket-products-mini > .product-mini:last-child').length == 0) $('.basket-product-none').show();
+
+                if($('.basket-products-mini > .product-mini').length == 0) {
+                    $('.product-summ').hide();
+                    $('.product-summ-num').text(`0$`);
+                    $('.basket-product-none').show();
+                    $('.basket-count').fadeOut(250);
+                } else {
+                    $('.product-summ-num').text(`${+basketPrice - +price}$`);
+                }
             }); // end fadeOut
 
-            if($('.basket-products-mini > .product-mini').length == 0) {
-                console.log('length 0');
-                $('.product-summ').hide();
-                $('.product-summ-num').text(`0$`);
-            } else {
-                console.log('length  no no 0');
-                $('.product-summ-num').text(`${+basketPrice - +price}$`);
-                console.log(+basketPrice - +price);
-            }
         }); // end click
 
         let lineAnimate = new Promise(function(resolve, reject) {
@@ -665,11 +666,26 @@ $(document).on('click', '.add-basket', function() {
 }); // end on
 
 $(document).on('click', '.remove-the-basket', function() {
+    let basketPrice = $('.product-summ-num').text();
+    let price = $(this).siblings('.product-modal-price').text();
+    price = price.slice(0, price.length - 1);
+    price = +price;
+
+    basketPrice = basketPrice.slice(0, basketPrice.length - 1);
+    basketPrice = +basketPrice;
+
+
     let parentBlockId = $(this).parent('.product-modal').attr('id');
+
     $(`.basket-products-mini > .product-mini-id__${parentBlockId}`).remove();
-    console.log($('.basket-products-mini > .product-mini').length);
+
     if($('.basket-products-mini > .product-mini').length == 0) {
+        $('.product-summ').hide();
+        $('.product-summ-num').text(`0$`);
         $('.basket-product-none').show();
+        $('.basket-count').fadeOut(250);
+    } else {
+        $('.product-summ-num').text(`${+basketPrice - +price}$`);
     }
     $(this).removeClass('remove-the-basket').addClass('add-basket').text('Добавить в корзину');
 
