@@ -382,7 +382,8 @@ input[type=file] {
 
 .modal-body .form-submit,
 .add-basket,
-.remove-the-basket {
+.remove-the-basket,
+.buy {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -401,6 +402,11 @@ input[type=file] {
     cursor: pointer;
     transition: .5s;
     margin-top: 80vh;
+}
+
+.buy {
+    display: none;
+    background-color: #DE781F;
 }
 
 .form-submit:hover {
@@ -641,6 +647,27 @@ input[type=file] {
     font-weight: bold;
     font-size: 1.2em;
     display: none;
+}
+
+.bi-eggs {
+    display: none;
+    text-align: center;
+}
+
+.bi-eggs > .down {
+    position: fixed;
+    bottom: 10px;
+    font-size: 2em;
+    color: black;
+}
+
+.bi-eggs > h1 {
+    font-size: 6em;
+}
+
+.bi-eggs > .hi {
+    position: absolute;
+    margin-top: 100%;
 }
 
 @media(min-width: 700px) {

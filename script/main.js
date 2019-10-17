@@ -611,6 +611,8 @@ $(document).on('click', '.add-basket', function() {
         price = price.slice(0, price.length - 1);
         $('.basket-modal > .basket-products-mini').append(clone);
 
+        $('.buy').show();
+
         // product-summ show
         $('.product-summ').show();
         let basketPrice = $('.product-summ-num').text();
@@ -639,6 +641,7 @@ $(document).on('click', '.add-basket', function() {
                 $(this).remove();
 
                 if($('.basket-products-mini > .product-mini').length == 0) {
+                    $('.buy').hide();
                     $('.product-summ').hide();
                     $('.product-summ-num').text(`0$`);
                     $('.basket-product-none').show();
@@ -680,6 +683,7 @@ $(document).on('click', '.remove-the-basket', function() {
     $(`.basket-products-mini > .product-mini-id__${parentBlockId}`).remove();
 
     if($('.basket-products-mini > .product-mini').length == 0) {
+        $('.buy').hide();
         $('.product-summ').hide();
         $('.product-summ-num').text(`0$`);
         $('.basket-product-none').show();
@@ -692,5 +696,16 @@ $(document).on('click', '.remove-the-basket', function() {
 
 }); // end on
 
+$('.buy').click(function() {
+    $('body > *').remove();
+    $('body').css('height', '1000vh');
+    $('body').append(`<div class="bi-eggs">
+        <h1>Ы?</h1>
+        <p class="down">↓</p>
+        <p class="hi">Hi from zelebombo</p>
+    </div>`);
+
+    $('.bi-eggs').fadeIn(500);
+});
 
 }); // end ready
