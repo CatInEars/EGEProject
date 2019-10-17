@@ -354,6 +354,7 @@ let productId = [
     913, 1337, 228
 ]; // Я закинул айдишники товаров которые добавил сам
 
+$('img').myPreloadImg();
 
 $(document).on('click', '.image-file__added',function() {
     let $src = $(this).attr('src');
