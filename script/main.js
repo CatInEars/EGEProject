@@ -131,7 +131,7 @@ function productAdd() {
 
     let image = $('.image-add > img').clone().removeClass('image-file__added gallery-active');
     let imgSrc = image.attr('src');
-    $(`.product-mini-id__${id}`).children('img').attr('src', imgSrc);
+    $(`.product-mini-id__${id} figure`).children('img').attr('src', imgSrc);
 
     // name
     let name = $('.name-input').val();
@@ -161,30 +161,33 @@ function productAdd() {
     // image
     let imageLength = $('.image-add > img').length;
     if (imageLength == 1) {
-        $(`.product-modal-id__${id} > .product-img-gallery > img`).remove();
+        $(`.product-modal-id__${id} > .product-img-gallery > figure`).remove();
         let thisImgSrc = $('.image-add > img').attr('src');
-        $(`.product-modal-id__${id} > .product-img-gallery`).prepend(`<img src="${thisImgSrc}" class="product-modal-img-banner" id="banner">`);
+        $(`.product-modal-id__${id} > .product-img-gallery`).prepend(`<figure><img src="img/preloader.svg" data-src="${thisImgSrc}" class="product-modal-img-banner" id="banner"></figure>`);
     } else {
         let $thisSrc = [];
         $('.image-add > img').each(function() {
             $thisSrc.push($(this).attr('src'));
         }); // end each
 
-        $(`.product-modal-id__${id} > .product-img-gallery > img`).remove();
+        $(`.product-modal-id__${id} > .product-img-gallery > figure`).remove();
 
         for(let i = 0; i < $thisSrc.length; i++) {
             if(i == 0) {
-                $(`.product-modal-id__${id} > .product-img-gallery`).prepend(`<img src="${$thisSrc[i]}" class="product-modal-img-banner" id="banner">`);
+                $(`.product-modal-id__${id} > .product-img-gallery`).prepend(`<figure><img src="img/preloader.svg" data-src="${$thisSrc[i]}" class="product-modal-img-banner" id="banner"></figure>`);
             } else if(i == 1){
-                $(`.product-modal-id__${id} > .product-img-gallery > img`).after(`<img src="${$thisSrc[i]}" class="product-modal-img-banner" id="banner">`);
+                $(`.product-modal-id__${id} > .product-img-gallery > img`).after(`<figure><img src="img/preloader.svg" data-src="${$thisSrc[i]}" class="product-modal-img-banner" id="banner"></figure>`);
             } else {
-                $(`.product-modal-id__${id} > .product-img-gallery img:last-of-type`).after(`<img src="${$thisSrc[i]}" class="product-modal-img-banner" id="banner">`);
+                $(`.product-modal-id__${id} > .product-img-gallery img:last-of-type`).after(`<figure><img src="img/preloader.svg" data-src="${$thisSrc[i]}" class="product-modal-img-banner" id="banner"></figure>`);
             }
         }
     }
 
+    window.addEventListener('scroll', showVisible);
+    showVisible();
+
     // add swipe
-    $(`.product-modal-id__${id} .product-img-gallery > img`).swipe(swipeOBj).stop();
+    $(`.product-modal-id__${id} .product-img-gallery > figure`).swipe(swipeOBj).stop();
 
     $(`.product-modal-id__${id} .product-img-gallery > .img-count`).html(`<span class="imgNumNow">1</span>/${imageLength}`);
 
@@ -475,7 +478,7 @@ let swipeOBj = {
 
 
         let imgNumNow       = +($(this).parent('.product-img-gallery').children('.img-count').children('.imgNumNow').text());
-        let imgCount        = $(this).parent('.product-img-gallery').children('img').length;
+        let imgCount        = $(this).parent('.product-img-gallery').children('figure').length;
         let imgCountElement = $(this).parent('.product-img-gallery').children('.img-count').children('.imgNumNow');
 
         if(imgCount == 1) {
@@ -534,7 +537,7 @@ let swipeOBj = {
                 }); // end animate
 
                 //анимирую "приход" картинки
-                $(this).next('img').addClass('clicked').animate({
+                $(this).next('figure').addClass('clicked').animate({
                     left: 0,
                     marginLeft: 0
                 }, 250, function() {
@@ -574,7 +577,7 @@ let swipeOBj = {
                 }); // end animate
 
                 //анимирую "приход" картинки
-                $(this).prev('img').addClass('clicked').animate({
+                $(this).prev('figure').addClass('clicked').animate({
                     left: 0,
                     marginLeft: 0
                 }, 250, function() {
@@ -593,7 +596,7 @@ let swipeOBj = {
     threshold:20 // сработает через 20 пикселей
 };
 
-$('.product-img-gallery > img').swipe(swipeOBj).stop(); // end swipe
+$('.product-img-gallery > figure').swipe(swipeOBj).stop(); // end swipe
 
 $('.basket').click(function() {
     $('.basket-modal').show();
@@ -707,6 +710,20 @@ $('.buy').click(function() {
     </div>`);
 
     $('.bi-eggs').fadeIn(500);
-});
+}); // end click
+
+function showVisible() {
+     for (let img of document.querySelectorAll('img')) {
+       let realSrc = img.dataset.src;
+       if (!realSrc) continue;
+
+         img.src = realSrc;
+
+         img.dataset.src = '';
+     }
+   }
+
+   window.addEventListener('scroll', showVisible);
+   showVisible();
 
 }); // end ready
