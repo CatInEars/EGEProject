@@ -121,7 +121,7 @@ function productAdd() {
     productId.push(id);
 
     let miniClone  = $('.products-mini > .product-mini-id__228').clone(true);
-    let modalClone = $('.modal:first-child').clone();
+    let modalClone = $('.products-modal > .modal:first-child').clone();
 
     miniClone.removeClass('product-mini-id__228').addClass(`product-mini-id__${id}`).attr('id', id);
 
@@ -132,6 +132,7 @@ function productAdd() {
     let image = $('.image-add > img').clone().removeClass('image-file__added gallery-active');
     let imgSrc = image.attr('src');
     $(`.product-mini-id__${id}`).children('img').attr('src', imgSrc);
+    $(`.product-mini-id__${id}`).children('img').attr('img_src', imgSrc);
 
     // name
     let name = $('.name-input').val();
@@ -610,13 +611,13 @@ $('.basket-modal > .modal-close').click(function() {
 }); // end click
 
 $(document).on('click', '.add-basket', function() {
-    $('.basket-products-mini img:last-child').myPreloadImg();
+    $('.basket-products-mini img').myPreloadImg();
     if(!$(this).hasClass('remove-the-basket')) {
         let parentBlockId = $(this).parent('.product-modal').attr('id');
         let clone = $(`.products > .products-mini > .product-mini-id__${parentBlockId}`).clone(true);
-        console.log(`.products > .products-mini > .product-mini-id__${parentBlockId}`);
         let price = clone.children('.product-mini-price').text();
         price = price.slice(0, price.length - 1);
+        price = +price
         $('.basket-modal > .basket-products-mini').append(clone);
 
         $('.buy').show();
