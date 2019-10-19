@@ -228,6 +228,11 @@ function productAdd() {
         productId.splice(productId.length - 1);
     }); // end click
 
+    //button
+    if($(`.product-modal-id__${id} > a`).hasClass('remove-the-basket')) {
+        $(`.product-modal-id__${id} > a`).removeClass('remove-the-basket').addClass('add-basket').text('добавить в корзину');
+    }
+
 }
 
 function typeFileCheck(src) {
@@ -605,10 +610,11 @@ $('.basket-modal > .modal-close').click(function() {
 }); // end click
 
 $(document).on('click', '.add-basket', function() {
-    $('img').myPreloadImg();
+    $('.basket-products-mini img:last-child').myPreloadImg();
     if(!$(this).hasClass('remove-the-basket')) {
         let parentBlockId = $(this).parent('.product-modal').attr('id');
         let clone = $(`.products > .products-mini > .product-mini-id__${parentBlockId}`).clone(true);
+        console.log(`.products > .products-mini > .product-mini-id__${parentBlockId}`);
         let price = clone.children('.product-mini-price').text();
         price = price.slice(0, price.length - 1);
         $('.basket-modal > .basket-products-mini').append(clone);
