@@ -94,8 +94,6 @@ function formChecker(context) {
         }
     }
 
-    console.log(isInteger(+price));
-
     if ($('.image-file__added').length == 0) {
         $('.image-added-message__error').hide();
         $('.image-added-message__error-submit').show();
@@ -301,7 +299,6 @@ function imageGallery(input) {
           }
 
           if($('.image-file__added').length == 6) {
-              console.log('in if');
               $('.image-add .label').hide();
           }
         }
