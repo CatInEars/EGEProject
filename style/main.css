@@ -479,21 +479,12 @@ input[type=file] {
     margin-right: 3%;
 }
 
-figure {
-    margin: 0;
-}
-
-.product-mini figure,
-.product-mini img {
+.product-mini > img {
     width: 100%;
     height: 65%;
     object-fit: cover;
     border-radius: .3em .3em 0 0;
     margin-bottom: .5em;
-}
-
-.product-mini img {
-    height: 95%;
 }
 
 .product-mini > .span-padding {
@@ -537,24 +528,19 @@ figure {
     height: 17em;
 }
 
-.product-modal > .product-img-gallery figure:not(:first-child) {
+.product-modal > .product-img-gallery > img:not(:first-child) {
     position: absolute;
     left: 100%;
     margin-left: 1.5em;
 }
 
-.product-modal > .product-img-gallery figure,
-.product-modal > .product-img-gallery img{
+.product-modal > .product-img-gallery > img {
     position: absolute;
     object-fit: cover;
     width: 100%;
     height: 17em;
     border-radius: .5em;
     margin-top: .5em;
-}
-
-.product-modal > .product-img-gallery figure {
-    margin-top: 0;
 }
 
 .img-count {
