@@ -605,6 +605,7 @@ $('.basket-modal > .modal-close').click(function() {
 }); // end click
 
 $(document).on('click', '.add-basket', function() {
+    $('img').myPreloadImg();
     if(!$(this).hasClass('remove-the-basket')) {
         let parentBlockId = $(this).parent('.product-modal').attr('id');
         let clone = $(`.products > .products-mini > .product-mini-id__${parentBlockId}`).clone(true);
